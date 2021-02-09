@@ -5,6 +5,6 @@
 
 #####This has A LOT of benefits!
 
-#####If you would like to see the deployed page, plese visit:
+#####If you would like to see the deployed page, please visit:
 
 [https://www.frankcraven.dev](https://www.frankcraven.dev "Frank Craven's Portfolio")
