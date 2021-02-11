@@ -34,15 +34,19 @@ export default function Home() {
           <ul className={styles.ul}>
 
             {/* Resume */}
-              <Link href='public/Resume-Francis-Craven.pdf' >
-                <li className={`${styles.neumorphic} ${styles.li}`}>
+
+              <li className={`${styles.neumorphic} ${styles.li}`}>
+                <a  className={styles.a}
+                    href='Resume-Francis-Craven.pdf'
+                    target='_blank'>
                   <div className={`${styles.iconContainer} ${styles.neumorphic}`}>
                     <FontAwesomeIcon  className={styles.faIcon}
                                       icon={faFile}/>
                   </div>
                   <h3 className={styles.h3}>Resume</h3>
-                </li>
-              </Link>
+                </a>
+              </li>
+
 
              {/* LinkedIn */}
              <Link href='https://www.linkedin.com/in/frank-craven-ab1029b3/'>
