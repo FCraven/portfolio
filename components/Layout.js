@@ -3,9 +3,9 @@ import { Navbar, Footer} from './index'
 const Layout =({children})=> {
     return (
         <div className='content'>
-            <Navbar />
+            {/* <Navbar /> */}
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

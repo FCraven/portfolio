@@ -1,3 +1,62 @@
+/* BASELINE STYLE IS PHONE PORTRAIT */
+.main {
+    position: relative;
+    height: 90vh;
+    width: 90vw;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.neumorphic {
+    border: none;
+    box-shadow:
+    /* DARK SHADOW */
+    5px 5px 10px 1px black,
+    /* LIGHT SHADOW */
+    -1px -1px 10px 0px rgba(255,255,255,0.5);
+    /* border-top: 1px solid rgba(255,255,255,0.5); */
+    border-radius: 1em;
+    border-right: 1px solid rgba(0,0,0,0.5);
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}
+
+.headline {
+    display: relative;
+    height: 25%;
+    width: 85%;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.linksContainer {
+    display: relative;
+    height: 55%;
+    width: 85%;
+    margin: 1em;
+}
+
+
+.h3 {
+    color: rgba(0,0,0,.8);
+    text-shadow:
+    /* DARK SHADOW */
+    2px 1px 3px rgba(0, 0, 0, 0.7),
+    /* LIGHT SHADOW */
+    -2px 0px 4px rgba(255,255,255,0.3);
+    font-size: 4em;
+    text-align: center;
+    padding: 1em;
+}
+
+/* PHONE PORTRAIT */
+@media only screen and (max-width: 600px) {
 
 
 
+}
