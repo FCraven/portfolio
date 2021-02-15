@@ -43,10 +43,10 @@ export default function Home() {
 
         {/* HEADLINE */}
         <div className={`${styles.headline} ${styles.neumorphic}`}>
-          <div className={`${styles.headlineText} ${styles.text}`}>
-            This site will undergo renovations from 2/13/2021 - 2/20/2021
-
-          </div>
+          <div className={`${styles.headlineText} ${styles.text}`}>This site will </div>
+          <div className={`${styles.headlineText} ${styles.text}`}>undergo renovations</div>
+          <div className={`${styles.headlineText} ${styles.text}`}>from </div>
+          <div className={`${styles.headlineText} ${styles.text}`}>2/13/2021 - 2/20/2021 </div>
         </div>
 
         {/* LINKS CONTAINER */}

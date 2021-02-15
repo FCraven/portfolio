@@ -47,7 +47,7 @@
     margin: .5em;
 }
 
-.headlineText {
+/* .headlineText {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -58,6 +58,17 @@
     padding: .5em;
     font-size: 1.5em;
     text-align: center;
+} */
+
+.headlineText {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
 }
 
 .linksContainer {
