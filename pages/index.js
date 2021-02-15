@@ -23,9 +23,10 @@ export default function Home() {
 
         {/* HEADLINE */}
         <div className={`${styles.headline} ${styles.neumorphic}`}>
-          <h3 className={styles.h3}>
-            This site is currently being upgraded
-          </h3>
+          <div className={`${styles.headlineText} ${styles.text}`}>
+            This site will undergo renovations from 2/13/2021 - 2/20/2021
+
+          </div>
         </div>
 
         {/* LINKS CONTAINER */}
@@ -34,52 +35,59 @@ export default function Home() {
           <ul className={styles.ul}>
 
             {/* Resume */}
-
               <li className={`${styles.neumorphic} ${styles.li}`}>
                 <a  className={styles.a}
                     href='Resume-Francis-Craven.pdf'
                     target='_blank'>
-                  <div className={`${styles.iconContainer} ${styles.neumorphic}`}>
-                    <FontAwesomeIcon  className={styles.faIcon}
-                                      icon={faFile}/>
-                  </div>
-                  <h3 className={styles.h3}>Resume</h3>
+                    <div className={styles.iconLinkContainer}>
+                      <div className={`${styles.iconContainer} ${styles.neumorphic}`}>
+                        <FontAwesomeIcon  className={styles.faIcon}
+                                          icon={faFile}/>
+                      </div>
+                      <h3 className={`${styles.linkText} ${styles.text}`}>Resume</h3>
+                    </div>
                 </a>
               </li>
 
 
              {/* LinkedIn */}
-             <Link href='https://www.linkedin.com/in/frank-craven-ab1029b3/'>
-              <li className={`${styles.neumorphic} ${styles.li}`}>
+            <li className={`${styles.neumorphic} ${styles.li}`}>
+              <a  className={styles.a}
+                  href='https://www.linkedin.com/in/frank-craven-ab1029b3/'
+                  target='_blank'>
                 <div className={styles.iconContainer}>
                   <FontAwesomeIcon  className={styles.faIcon}
                                     icon={faLinkedin}/>
                 </div>
-                <h3 className={styles.h3}>LinkedIn</h3>
-              </li>
-            </Link>
+                <h3 className={`${styles.linkText} ${styles.text}`}>LinkedIn</h3>
+              </a>
+            </li>
 
             {/* Github */}
-              <Link href='https://www.github.com/fcraven'>
-                <li className={`${styles.neumorphic} ${styles.li}`}>
+              <li className={`${styles.neumorphic} ${styles.li}`}>
+                <a  className={styles.a}
+                    href='https://www.github.com/fcraven'
+                    target='_blank'>
                   <div className={styles.iconContainer}>
                     <FontAwesomeIcon  className={styles.faIcon}
                                       icon={faGithub} />
                   </div>
-                  <h3 className={styles.h3}>Github</h3>
-                </li>
-              </Link>
+                  <h3 className={`${styles.linkText} ${styles.text}`}>Github</h3>
+                </a>
+              </li>
 
             {/* Instagram */}
-            <Link href='https://www.instagram.com/francois_letanqa/'>
-              <li className={`${styles.neumorphic} ${styles.li}`}>
+            <li className={`${styles.neumorphic} ${styles.li}`}>
+              <a  className={styles.a}
+                  href='https://www.instagram.com/francois_letanqa/'
+                  target='_blank'>
                 <div className={styles.iconContainer}>
                   <FontAwesomeIcon  className={styles.faIcon}
                                     icon={faInstagram}/>
                 </div>
-                <h3 className={styles.h3}>Instagram</h3>
-              </li>
-            </Link>
+                <h3 className={`${styles.linkText} ${styles.text}`}>Instagram</h3>
+              </a>
+            </li>
 
           </ul>
         </div>
