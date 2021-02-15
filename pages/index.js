@@ -1,11 +1,31 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub,
          faInstagram,
          faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faFile } from '@fortawesome/free-regular-svg-icons'
+
+const MenuLink =(props)=> {
+  return (
+    <>
+      <li className={`${styles.neumorphic} ${styles.li}`}>
+                <a  className={styles.a}
+                    href='Resume-Francis-Craven.pdf'
+                    target='_blank'>
+                    <div className={styles.iconLinkContainer}>
+                      <div className={`${styles.iconContainer} ${styles.neumorphic}`}>
+                        <FontAwesomeIcon  className={styles.faIcon}
+                                          icon={faFile}/>
+                      </div>
+                      <h3 className={`${styles.linkText} ${styles.text}`}>Resume</h3>
+                    </div>
+                </a>
+              </li>
+    </>
+  )
+}
+
 
 
 export default function Home() {
