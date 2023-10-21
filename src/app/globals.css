@@ -1,0 +1,43 @@
+:root {
+  --color-faded-black: #2E2E2E;
+  --color-sepia: #8A7C69;
+  --color-off-white: #FAF3E0;
+  --color-muted-blue: #697D91;
+  --color-muted-red: #9A6A6C;
+  --line-height: 1.5;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+}
+
+body {
+  background-color: var(--color-off-white);
+  color: var(--color-black);
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+section {
+  background-color: var(--color-sepia);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: extrabold;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+

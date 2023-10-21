@@ -1,22 +1,25 @@
-import { Inter } from 'next/font/google'
+import { Bitter } from 'next/font/google'
 import './globals.css'
+import StyledComponentsRegistry from '../lib/registry';
 
 import { Header, Footer } from '../components';
 
-const inter = Inter({ subsets: ['latin'] })
+const bitter = Bitter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Francis Craven',
-  description: 'A portfolio website to showcase my projects & experience.',
+  description: '- Frontend Developer - ',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Header />
-          {children}
-        <Footer />
+      <body className={bitter.className}>
+         <StyledComponentsRegistry>
+          <Header />
+            {children}
+          <Footer />
+        </StyledComponentsRegistry>
       </body>
     </html>
   )
