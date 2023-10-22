@@ -53,20 +53,35 @@ const NavItem = styled.a`
   padding: .5rem 1rem;
   border: 3px groove var(--color-sepia);
   border-radius: 1rem;
-  color: ${({ $isActive }) => $isActive ? 'var(--color-muted-blue)' : 'var(--color-off-white)'};
+  color: ${({ $isActive }) => $isActive ? 'var(--color-off-white)' : 'var(--color-faded-black)'};
   cursor: pointer;
+  font-weight: 700;
   text-decoration: none;
-  text-shadow: -1px 0 2px var(--color-faded-black);
+  text-shadow: 0 0 2px var(--color-off-white);
   box-shadow: -1px -1px 1px var(--color-muted-red),
               1px 1px 1px var(--color-muted-blue),
-              -2px -2px 3px var(--color-off-white);
+              -2px -2px 3px var(--color-off-white),
+              3px 3px 3px var(--color-faded-black);
+
   &:hover {
-    transform: scale(1.1);
+    background: linear-gradient(45deg,
+      var(--color-off-white),
+      var(--color-muted-blue),
+      var(--color-sepia),
+      var(--color-muted-red),
+      var(--color-off-white)
+    );
+    color: var(--color-off-white);
+    text-shadow: 0 0 6px var(--color-faded-black);
+    box-shadow: 0 0 5px var(--color-off-white);
+    border: 2px solid var(--color-off-white);
   }
 
   &:active {
-    transform: scale(1);
-    background-color: red;
+    border: 3px groove var(--color-sepia);
+    transform: scale(.95);
+    background: linear-gradient(45deg, var(--color-sepia), var(--color-muted-red));
+    color: var(--color-muted-red);
   }
 `;
 
