@@ -2,7 +2,7 @@ import { Bitter } from 'next/font/google'
 import './globals.css'
 import StyledComponentsRegistry from '../lib/registry';
 
-import { Header, Footer } from '../components';
+import { Header, Footer, Layout } from '../components';
 
 const bitter = Bitter({ subsets: ['latin'] })
 
@@ -15,10 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={bitter.className}>
-         <StyledComponentsRegistry>
-          <Header />
-            {children}
-          <Footer />
+        <StyledComponentsRegistry>
+          <Layout>
+            <Header />
+              {children}
+            <Footer />
+          </Layout>
         </StyledComponentsRegistry>
       </body>
     </html>
