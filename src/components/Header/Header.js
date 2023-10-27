@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   height: 3.5rem;
-  padding: 0 2rem;
+  padding: 0 1rem;
   background: linear-gradient(45deg, #4B3E2F, #7D6752, #4B3E2F);
   border-top: .25rem groove var(--color-sepia);
   border-bottom: .35rem groove var(--color-sepia);
