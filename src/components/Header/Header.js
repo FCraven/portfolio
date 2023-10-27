@@ -82,7 +82,7 @@ const StyledLink = styled(Link)`
     text-shadow: 0 0 6px var(--color-faded-black);
     box-shadow: 0 0 5px var(--color-off-white);
     border: 2px solid var(--color-off-white);
-    transform: scale(1.1);
+    transform: scale(1.15);
   }
 
   &:active {
