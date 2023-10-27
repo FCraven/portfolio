@@ -13,6 +13,8 @@ const FooterContainer = styled.footer`
   border-bottom: .35rem groove var(--color-sepia);
 `
 
+
+
 const Footer =()=> {
   return (
     <FooterContainer />

@@ -18,7 +18,7 @@ const HeaderContainer = styled.header`
 
 const Logo = styled.h1`
   color: var(--color-faded-black);
-  font-size: 2.5vw;
+  font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: .05rem;
   text-shadow: -1px 0 2px var(--color-off-white),
@@ -51,10 +51,12 @@ const StyledLink = styled(Link)`
   border: 3px groove var(--color-sepia);
   border-radius: .5rem;
   display: flex;
+  flex: 1;
+  padding: .25rem;
+  margin: 0 .25rem;
   width: calc(100% - 1rem);
   justify-content: center;
   align-items: center;
-  font-size: 3vw;
   color: var(--color-faded-black);
   background: linear-gradient(45deg, #4B3E2F, #7D6752, #4B3E2F);
   font-weight: 700;
