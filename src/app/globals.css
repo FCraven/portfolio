@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-svg-core/styles.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Merriweather:wght@700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,6 +9,7 @@
   --foreground: #171717;
 }
 
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -15,9 +18,11 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-baseGray text-darkGray font-sans;
+}
+
+.dark body {
+  @apply bg-gray-700 text-white;
 }
 
 @layer utilities {
