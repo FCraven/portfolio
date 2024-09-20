@@ -4,7 +4,7 @@ export default function AboutPage() {
       <h1 className="text-4xl font-serif font-bold text-darkGray mb-6">About Me</h1>
       <div className="text-gray-700 space-y-6">
         <p>
-          I'm Francis Craven, a computer science student with front-end development and engineering experience. I am eager to apply my skills and contribute meaningfully to a collaborative, innovative, and passionate team.
+          {`I'm Francis Craven, a computer science student with front-end development and engineering experience. I am eager to apply my skills and contribute meaningfully to a collaborative, innovative, and passionate team.`}
         </p>
         <h2 className="text-2xl font-bold text-darkGray">Education</h2>
         <ul className="list-disc list-inside">
