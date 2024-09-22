@@ -1,4 +1,8 @@
+import resumeData from '../resumeData';
+const { email, github, linkedin } = resumeData
+
 export default function ContactPage() {
+  console.log('github', resumeData.github)
   return (
     <section className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-serif font-bold text-darkGray dark:text-white mb-6">Contact Me</h1>
@@ -7,21 +11,21 @@ export default function ContactPage() {
       </p>
       <ul className="space-y-4 text-gray-700 dark:text-white">
         <li>
-          <strong>Email:</strong>{' '}
-          <a href="mailto:craven.francis@gmail.com" className="text-primary hover:underline">
-            craven.francis@gmail.com
+          <strong>Email:</strong>
+          <a href={`mailto:${email}`} className="text-primary hover:underline px-4">
+            { email }
           </a>
         </li>
         <li>
-          <strong>GitHub:</strong>{' '}
-          <a href="https://github.com/your-github-username" className="text-primary hover:underline">
-            github.com/your-github-username
+          <strong>GitHub:</strong>
+          <a href={ github } className="text-primary hover:underline px-4">
+            { github }
           </a>
         </li>
         <li>
-          <strong>LinkedIn:</strong>{' '}
-          <a href="https://www.linkedin.com/in/your-linkedin-profile" className="text-primary hover:underline">
-            linkedin.com/in/your-linkedin-profile
+          <strong>LinkedIn:</strong>
+          <a href={ linkedin } className="text-primary hover:underline px-4">
+            { linkedin }
           </a>
         </li>
       </ul>
