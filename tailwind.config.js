@@ -9,6 +9,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        'gradient-animation': 'gradient-animation 5s ease infinite',
+      },
+      backgroundSize: {
+        'size-400' : '400% 400%'
+      },
       colors: {
         primary: '#007BFF',
         secondary: '#FF6F61',
@@ -20,6 +26,13 @@ module.exports = {
       fontFamily: {
         sans: ['Montserrat', 'Arial', 'sans-serif'],
         serif: ['Merriweather', 'serif'],
+      },
+      keyframes: {
+        'gradient-animation': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
       }
     },
   },
