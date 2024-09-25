@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        'gradient-animation': 'gradient-animation 5s ease infinite',
+        'gradient-animation': 'gradient-animation 10s ease-in-out infinite',
       },
       backgroundSize: {
         'size-400' : '400% 400%'
