@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`antialiased flex flex-col min-h-screen`}
+        className={`antialiased flex flex-col min-h-screen dark:bg-slate-700`}
       >
         <Navbar />
         <main className="flex-grow pt-16">{children}</main>

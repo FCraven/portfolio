@@ -18,12 +18,15 @@ export default function HomePage() {
           <h1 className="text-5xl font-serif font-bold text-white mb-6">
             Francis Craven
           </h1>
-          <p className="text-xl text-white mb-8">
-            Front End Developer & Computer Science Student
-          </p>
-          <p className="max-w-2xl mx-auto text-white mb-12">
-            An amalgamation of continuous progress and earned experience, eager to apply this dynamic blend of growth and proficiency, contributing meaningfully to a collaborative, innovative, and passionate team.
-          </p>
+          <article className='mb-8'>
+            <p className="text-xl text-white ">
+              Front End Developer
+            </p>
+            <hr/>
+            <p className="text-xl text-white ">
+              Computer Science Student
+            </p>
+          </article>
           <Link
             href="/projects"
             className="inline-block px-8 py-3 bg-primary text-white rounded-full hover:scale-105 hover:font-normal transition duration-300 ease-in-out shadow-md shadow-gray-300 hover:shadow-lg hover:shadow-slate-400 dark:shadow-gray-600"
@@ -33,5 +36,6 @@ export default function HomePage() {
         </div>
       </div>
     </section>
+
   );
 }

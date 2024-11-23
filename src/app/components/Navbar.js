@@ -15,7 +15,7 @@ export default function Navbar() {
                     z-10">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-serif font-bold text-primary">
-          <Link href="/">Francis Craven</Link>
+          <Link href="/">FC</Link>
         </div>
         <div>
           <ul className="flex space-x-6">

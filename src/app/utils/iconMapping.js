@@ -4,6 +4,7 @@ import {
   SiJavascript,
   SiExpress,
   SiReactrouter,
+  SiReaddotcv,
   SiRedux,
   SiMongodb,
   SiSqlite,
