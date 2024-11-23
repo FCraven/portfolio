@@ -1,26 +1,55 @@
 'use client';
 
-const FooterChip = ({ label, href }) => (
-  <a href={href} className="inline-block">
-    <div className="px-4 py-2 font-semibold rounded-full transition ease-in-out
-      bg-gray-200 text-gray-800 hover:bg-gray-300 hover:text-black border-2 border-gray-400 shadow-md
-      hover:shadow-lg transform hover:-translate-y-1 hover:scale-105
-      dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700 dark:hover:text-white dark:border-gray-500 dark:shadow-sm
-      dark:hover:shadow-md">
-      {label}
-    </div>
-  </a>
-);
+import Chip from './Chip';
 
 const Footer = () => (
-  <footer className="fixed bottom-0 left-0 right-0 flex flex-wrap justify-between gap-6 p-6
-    bg-white shadow-md backdrop-blur-sm bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-80
-    hover:bg-opacity-90 hover:shadow-lg dark:hover:bg-opacity-90 transition-all duration-300 ease-in-out">
-    <FooterChip label="Resume/CV" href="/resume.pdf" />
-    <FooterChip label="Email Me" href="mailto:your.email@example.com" />
-    <FooterChip label="LinkedIn" href="https://linkedin.com/in/yourprofile" />
-    <FooterChip label="GitHub" href="https://github.com/yourprofile" />
-    <FooterChip label="Hire Me" href="/contact" />
+  <footer className="bg-white shadow-md backdrop-blur-md bg-opacity-70 dark:bg-gray-900 dark:bg-opacity-80 p-6 border-t border-gray-200 dark:border-gray-700">
+    <div className="container mx-auto grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-5">
+      {/* Column 1: About Section */}
+      <div>
+        <h3 className="font-semibold mb-2">About Me</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Brief description about yourself or the purpose of this site, giving visitors a quick understanding of what it's about.
+        </p>
+      </div>
+      {/* Column 2: Quick Links */}
+      <div>
+        <h3 className="font-semibold mb-2">Quick Links</h3>
+        <ul className="space-y-2 text-sm">
+          <li><Chip href="/" label="Home" /></li>
+          <li><Chip href="/about" label="About Me" /></li>
+          <li><Chip href="/projects" label="Projects" /></li>
+          <li><Chip href="/contact" label="Contact" /></li>
+        </ul>
+      </div>
+      {/* Column 3: Contact Information */}
+      <div>
+        <h3 className="font-semibold mb-2">Contact</h3>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Email: <Chip href="mailto:your.email@example.com" label="your.email@example.com" />
+        </p>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Phone: <Chip href="tel:+1234567890" label="+123 456 7890" />
+        </p>
+      </div>
+      {/* Column 4: Social Media */}
+      <div>
+        <h3 className="font-semibold mb-2">Follow Me</h3>
+        <div className="flex space-x-4">
+          <Chip href="https://linkedin.com/in/yourprofile" label="LinkedIn" />
+          <Chip href="https://github.com/yourprofile" label="GitHub" />
+        </div>
+      </div>
+      {/* Column 5: Resume / CV */}
+      <div>
+        <h3 className="font-semibold mb-2">Resume / CV</h3>
+        <Chip href="/resume.pdf" label="Download Resume" />
+      </div>
+    </div>
+    {/* Bottom Section */}
+    <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-4 text-center text-xs text-gray-600 dark:text-gray-400">
+      <p>&copy; 2024 Francis Craven. All rights reserved.</p>
+    </div>
   </footer>
 );
 
