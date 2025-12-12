@@ -24,7 +24,8 @@ module.exports = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        sans: ['Montserrat', 'Arial', 'sans-serif'],
+        sans: ['var(--font-geist-sans)', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-geist-mono)', 'SFMono-Regular', 'Menlo', 'monospace'],
         serif: ['Merriweather', 'serif'],
       },
       keyframes: {

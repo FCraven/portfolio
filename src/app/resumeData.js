@@ -4,7 +4,7 @@ const resumeData = {
   github: 'https://www.github.com/FCraven',
   linkedin: 'https://www.linkedin.com/in/francis-craven-ab1029b3',
   summary:
-    'A computer science student with front-end development & engineering experience. An amalgamation of continuous progress & earned experience, eager to apply this dynamic blend of growth & proficiency by contributing in meaningful ways.',
+    'Front-end engineer and computer science student focused on performant, design-forward experiences. I blend commerce, component systems, and developer experience work to ship reliable products and lead teams well.',
   education: [
     {
       institution: 'CUNY Queens College',

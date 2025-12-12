@@ -1,51 +1,42 @@
 @import '@fortawesome/fontawesome-svg-core/styles.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Merriweather:wght@700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #05080f;
+  --foreground: #e2e8f0;
+  --accent: #2dd4bf;
+  --accent-strong: #f8c537;
 }
 
+@layer base {
+  * {
+    @apply selection:bg-teal-300/30 selection:text-white;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans tracking-tight;
+  }
+
+  a {
+    @apply transition-colors duration-200;
   }
 }
 
-body {
-  @apply bg-baseGray text-darkGray font-sans;
-}
+@layer components {
+  .glass-panel {
+    @apply rounded-3xl border border-white/10 bg-white/5 shadow-[0_24px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl;
+  }
 
-.dark body {
-  @apply bg-gray-700 text-white;
+  .subtle-grid {
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animated-gradient {
-  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-  background: linear-gradient(-45deg, #007BFF,#FF6F61, #89a9ca, #343A40);
-  background-size: 400% 400%;
-  animation: gradient-animation 15s ease infinite;
 }

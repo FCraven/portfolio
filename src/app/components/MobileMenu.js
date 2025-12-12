@@ -1,67 +1,66 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link'; // Importing Link component from Next.js for internal navigation
-import { Transition } from '@headlessui/react'; // Importing Transition component for smooth animation effects
-import { HiMenu, HiX } from 'react-icons/hi'; // Importing hamburger menu and close icons from Heroicons
+import Link from 'next/link';
+import { Transition } from '@headlessui/react';
+import { HiMenu, HiX } from 'react-icons/hi';
 
-export default function MobileMenu() {
-  // State to manage the visibility of the mobile menu
+const defaultLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
+];
+
+export default function MobileMenu({ links = defaultLinks }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Function to toggle the menu open/close state
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleMenu = () => setIsOpen((current) => !current);
 
   return (
-    <div className="sm:hidden relative"> {/* Only visible on small screens */}
-      {/* Button to toggle the visibility of the mobile menu */}
+    <div className="sm:hidden relative">
       <button
         onClick={toggleMenu}
-        className="p-2 text-gray-800 dark:text-gray-200"
+        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
         aria-label="Toggle mobile menu"
+        type="button"
       >
-        {/* Display either the menu or close icon based on the menu state */}
-        {isOpen ? <HiX size={28} /> : <HiMenu size={28} />}
+        {isOpen ? <HiX size={22} /> : <HiMenu size={22} />}
       </button>
 
-      {/* Transition component to handle the slide-in and fade-in effect of the mobile menu */}
       <Transition
         show={isOpen}
         enter="transform transition duration-300"
-        enterFrom="-translate-x-full opacity-0"
+        enterFrom="translate-x-full opacity-0"
         enterTo="translate-x-0 opacity-100"
         leave="transform transition duration-200"
         leaveFrom="translate-x-0 opacity-100"
-        leaveTo="-translate-x-full opacity-0"
+        leaveTo="translate-x-full opacity-0"
       >
-        {/* Mobile menu drawer styling */}
-        <div className="fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-700 shadow-lg p-6 flex flex-col gap-6 z-50">
-          {/* Close button inside the mobile menu */}
-          <button
-            onClick={toggleMenu}
-            className="self-end text-gray-800 dark:text-gray-200"
-            aria-label="Close mobile menu"
-          >
-            <HiX size={28} />
-          </button>
+        <div className="fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs border-l border-white/10 bg-slate-900/95 px-6 py-8 shadow-2xl backdrop-blur-xl">
+          <div className="flex items-center justify-between">
+            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Navigate</p>
+            <button
+              onClick={toggleMenu}
+              className="text-slate-200 transition hover:text-white"
+              aria-label="Close mobile menu"
+              type="button"
+            >
+              <HiX size={22} />
+            </button>
+          </div>
 
-          {/* Navigation links in the mobile menu */}
-          <nav className="flex flex-col space-y-4">
-            {/* Using Link component for internal navigation within the Next.js app */}
-            <Link href="/" className="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-400 transition">
-              Home
-            </Link>
-            <Link href="/about" className="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-400 transition">
-              About Me
-            </Link>
-            <Link href="/projects" className="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-400 transition">
-              Projects
-            </Link>
-            <Link href="/contact" className="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-gray-500 dark:hover:text-gray-400 transition">
-              Contact
-            </Link>
+          <nav className="mt-8 flex flex-col gap-3">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-base font-semibold text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:text-white hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
+                onClick={toggleMenu}
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </div>
       </Transition>

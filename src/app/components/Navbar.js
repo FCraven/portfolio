@@ -3,77 +3,48 @@
 import Link from 'next/link';
 import MobileMenu from './MobileMenu';
 import ThemeToggle from './ThemeToggle';
-import Chip from './Chip';
+
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
+];
 
 export default function Navbar() {
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-md text-black dark:text-white fixed w-full z-10 backdrop-blur-sm bg-opacity-70 dark:bg-opacity-80 hover:bg-opacity-90 hover:shadow-lg dark:hover:bg-opacity-90 transition-all duration-300 ease-in-out">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-serif font-bold text-primary">
-          <Link href="/">FC</Link>
-        </div>
-        {/* Mobile menu for small screens */}
-        <div className="md:hidden">
-          <MobileMenu />
-        </div>
-        {/* Regular navigation links for larger screens using Chip component */}
-        <div className="hidden md:flex space-x-6">
-          <Chip href="/" label="Home" />
-          <Chip href="/about" label="About" />
-          <Chip href="/projects" label="Projects" />
-          <Chip href="/contact" label="Contact" />
-          <ThemeToggle />
+    <nav className="fixed inset-x-0 top-0 z-30">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="glass-panel mt-4 flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-400 to-amber-300 text-lg font-semibold text-slate-900 shadow-lg shadow-teal-500/30">
+              FC
+            </span>
+            <div className="leading-tight">
+              <p className="text-[0.65rem] uppercase tracking-[0.24em] text-slate-400">Portfolio</p>
+              <p className="text-sm font-semibold text-white">Francis Craven</p>
+            </div>
+          </Link>
+
+          <div className="hidden md:flex items-center gap-2">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="rounded-full border border-white/10 px-4 py-2 text-sm font-medium text-slate-100 transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:text-white hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <ThemeToggle />
+          </div>
+
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <MobileMenu links={links} />
+          </div>
         </div>
       </div>
     </nav>
   );
 }
-
-
-
-
-// 'use client';
-
-// import Link from 'next/link';
-// import ThemeToggle from './ThemeToggle';
-// import MobileMenu from './MobileMenu';
-
-// export default function Navbar() {
-//   return (
-//     <>
-//       <MobileMenu />
-//       <nav className="hidden sm:block bg-white dark:bg-gray-800 shadow-md text-black dark:text-white fixed w-full z-10 backdrop-blur-sm bg-opacity-70 dark:bg-opacity-80 hover:bg-opacity-90 hover:shadow-lg dark:hover:bg-opacity-90 transition-all duration-300 ease-in-out">
-//         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-//           <div className="text-2xl font-serif font-bold text-primary">
-//             <Link href="/">FC</Link>
-//           </div>
-//           <div>
-//             <ul className="flex space-x-6">
-//               <li>
-//                 <Link href="/" className="hover:text-primary dark:hover:text-secondary">
-//                   Home
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link href="/about" className="hover:text-primary dark:hover:text-secondary">
-//                   About
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link href="/projects" className="hover:text-primary dark:hover:text-secondary">
-//                   Projects
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link href="/contact" className="hover:text-primary dark:hover:text-secondary">
-//                   Contact
-//                 </Link>
-//               </li>
-//               <ThemeToggle />
-//             </ul>
-//           </div>
-//         </div>
-//       </nav>
-//     </>
-//   );
-// }
