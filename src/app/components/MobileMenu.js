@@ -37,7 +37,7 @@ export default function MobileMenu({ links = defaultLinks }) {
         leaveFrom="translate-x-0 opacity-100"
         leaveTo="translate-x-full opacity-0"
       >
-        <div className="fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs border-l border-white/15 bg-slate-950/90 px-6 py-8 shadow-[0_20px_80px_rgba(2,6,23,0.75)] backdrop-blur-xl">
+        <div className="fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs border-l border-white/20 bg-slate-950 px-6 py-8 shadow-[0_24px_90px_rgba(2,6,23,0.85)]">
           <div className="flex items-center justify-between">
             <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Navigate</p>
             <button
@@ -55,7 +55,7 @@ export default function MobileMenu({ links = defaultLinks }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-base font-semibold text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:text-white hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
+                className="rounded-2xl border border-white/15 bg-slate-900 px-4 py-3 text-base font-semibold text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:text-white hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
                 onClick={toggleMenu}
               >
                 {link.label}
