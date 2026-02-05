@@ -1,24 +1,28 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useState, useEffect } from 'react';
 import { HiMoon, HiSun } from 'react-icons/hi';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-    if (stored) {
-      setTheme(stored);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
+    if (typeof window === 'undefined') return;
+    const stored = localStorage.getItem('theme');
+    const nextTheme =
+      stored === 'light' || stored === 'dark'
+        ? stored
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+    setTheme(nextTheme);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
-    if (typeof document === 'undefined') return;
+    if (typeof document === 'undefined' || !mounted) return;
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -26,7 +30,7 @@ export default function ThemeToggle() {
       root.classList.remove('dark');
     }
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'));
@@ -41,7 +45,7 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       type="button"
     >
-      {isDark ? <HiSun size={18} /> : <HiMoon size={18} />}
+      {mounted ? (isDark ? <HiSun size={18} /> : <HiMoon size={18} />) : null}
     </button>
   );
 }
