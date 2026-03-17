@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import MatrixRain from './components/MatrixRain';
 import KonamiCode from './components/KonamiCode';
+import ConsoleMessage from './components/ConsoleMessage';
 
 const orbitron = Orbitron({
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
         </div>
         <div className="scanlines" />
         <KonamiCode />
+        <ConsoleMessage />
         <Navbar />
         <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-10">{children}</main>
         <Footer />
