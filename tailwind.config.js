@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,32 +8,27 @@ module.exports = {
   ],
   theme: {
     extend: {
-      animation: {
-        'gradient-animation': 'gradient-animation 10s ease-in-out infinite',
-      },
-      backgroundSize: {
-        'size-400' : '400% 400%'
-      },
       colors: {
-        primary: '#007BFF',
-        secondary: '#FF6F61',
-        baseGray: '#F8F9FA',
-        darkGray: '#343A40',
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        void: '#0A0A0F',
+        surface: '#12121A',
+        'surface-light': '#1C1C2E',
+        'neon-green': '#00FF88',
+        'neon-cyan': '#00D4FF',
+        'neon-magenta': '#FF00FF',
+        'text-primary': '#E0E0E0',
+        'text-muted': '#5A5A7A',
+        border: '#2A2A3A',
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'SFMono-Regular', 'Menlo', 'monospace'],
-        serif: ['Merriweather', 'serif'],
+        heading: ['var(--font-orbitron)', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
       },
-      keyframes: {
-        'gradient-animation': {
-          '0%': { 'background-position': '0% 50%' },
-          '50%': { 'background-position': '100% 50%' },
-          '100%': { 'background-position': '0% 50%' },
-        },
-      }
+      animation: {
+        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
+        'glitch': 'glitch 0.3s ease-in-out',
+        'float': 'float 3s ease-in-out infinite',
+        'blink': 'blink 1s step-end infinite',
+      },
     },
   },
   plugins: [require('@tailwindcss/aspect-ratio')],

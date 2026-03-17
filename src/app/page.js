@@ -1,123 +1,229 @@
 'use client';
 
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
 import resumeData from './resumeData';
 import { Button } from './components/ui/button';
 import { Badge } from './components/ui/badge';
+import GlitchText from './components/GlitchText';
+import BootSequence from './components/BootSequence';
+import InteractiveTerminal from './components/InteractiveTerminal';
 
-const featuredLogos = resumeData.experience[0]?.projects?.slice(0, 5) || [];
-const featuredExperience = resumeData.experience.slice(0, 3);
-const focusAreas = [
-  'Design systems & UI libraries',
-  'High-performing eCommerce experiences',
-  'Developer experience & workflows',
-  'Data-informed UX decisions',
+const stats = [
+  { label: 'REVENUE_INFLUENCED', numValue: 1.5, prefix: '$', suffix: 'M', unit: '/month', color: 'text-neon-green', decimals: 1 },
+  { label: 'DEVS_TRAINED', numValue: 350, prefix: '', suffix: '', unit: '+', color: 'text-neon-cyan', decimals: 0 },
+  { label: 'ACTIVE_OPERATIONS', numValue: 3, prefix: '', suffix: '', unit: ' live', color: 'text-neon-magenta', decimals: 0 },
 ];
-const keyTech = ['React', 'Next.js', 'Shopify Hydrogen', 'TypeScript', 'Node.js', 'Tailwind'];
+
+const arsenal = ['React', 'Next.js', 'Vue.js', 'TypeScript', 'Node.js', 'Medusa.js', 'Shopify'];
+
+function TypewriterText({ text, delay = 0 }) {
+  const [displayed, setDisplayed] = useState('');
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 30);
+    return () => clearInterval(interval);
+  }, [started, text]);
+
+  return (
+    <span>
+      {displayed}
+      {displayed.length < text.length && <span className="animate-blink">_</span>}
+    </span>
+  );
+}
+
+function AnimatedCounter({ target, prefix = '', suffix = '', decimals = 0, duration = 2000, delay = 0 }) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setStarted(true), delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!started) return;
+    const steps = 40;
+    const stepDuration = duration / steps;
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current++;
+      const progress = current / steps;
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(target * eased);
+      if (current >= steps) {
+        setCount(target);
+        clearInterval(interval);
+      }
+    }, stepDuration);
+
+    return () => clearInterval(interval);
+  }, [started, target, duration]);
+
+  return <span>{prefix}{decimals > 0 ? count.toFixed(decimals) : Math.round(count)}{suffix}</span>;
+}
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
 
 export default function HomePage() {
+  const [booted, setBooted] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && sessionStorage.getItem('craven_os_booted')) {
+      setBooted(true);
+    }
+  }, []);
+
+  const handleBootComplete = useCallback(() => {
+    setBooted(true);
+  }, []);
+
   return (
-    <section className="mx-auto max-w-6xl space-y-12">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-        <div className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.24em] text-teal-200">Front-end engineer & CS student</p>
-          <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-[52px]">
-            Building interfaces that feel premium, fast, and intentional.
-          </h1>
-          <p className="max-w-2xl text-lg text-slate-300">
-            {resumeData.summary}
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Button asChild>
-              <Link href="/projects">View projects & experience</Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link href="/contact">Work together</Link>
-            </Button>
-          </div>
+    <>
+      <BootSequence onComplete={handleBootComplete} />
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="glass-panel px-4 py-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Commerce impact</p>
-              <p className="mt-2 text-2xl font-semibold text-white">$1.5M/mo</p>
-              <p className="text-sm text-slate-400">Revenue influenced across boutique brands</p>
-            </div>
-            <div className="glass-panel px-4 py-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Teaching</p>
-              <p className="mt-2 text-2xl font-semibold text-white">350+ devs</p>
-              <p className="text-sm text-slate-400">Mentored through full-stack curriculum</p>
-            </div>
-            <div className="glass-panel px-4 py-4">
-              <p className="text-xs uppercase tracking-[0.16em] text-slate-400">Toolbox</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {keyTech.map((tech, idx) => (
-                  <Badge key={tech} variant={idx === 0 ? 'accent' : 'default'}>
-                    {tech}
-                  </Badge>
-                ))}
+      {booted && (
+        <section className="mx-auto max-w-6xl space-y-12">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            {/* System header */}
+            <motion.div variants={itemVariants} className="space-y-2">
+              <p className="text-[10px] uppercase tracking-[0.4em] text-text-muted font-mono">
+                // SYSTEM.BOOT — CRAVEN_OS v1.0
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-neon-green shadow-[0_0_8px_rgba(0,255,136,0.5)] animate-glow-pulse" />
+                <span className="text-xs text-neon-green font-mono">STATUS: ONLINE</span>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
 
-        <div className="glass-panel subtle-grid relative overflow-hidden px-6 py-7">
-          <div className="absolute -left-10 top-4 h-24 w-24 rounded-full bg-teal-400/10 blur-3xl" />
-          <div className="absolute -right-10 bottom-10 h-24 w-24 rounded-full bg-amber-300/10 blur-3xl" />
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">What I&apos;m focused on</p>
-          <div className="mt-4 space-y-3">
-            {focusAreas.map((focus) => (
-              <div
-                key={focus}
-                className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200"
+            {/* Hero with Glitch */}
+            <motion.div variants={itemVariants}>
+              <h1 className="font-heading text-4xl font-bold leading-tight text-text-primary sm:text-5xl lg:text-6xl tracking-tight">
+                <GlitchText className="text-neon-green neon-text">FRANCIS</GlitchText>
+                <br />
+                <GlitchText>CRAVEN</GlitchText>
+              </h1>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="max-w-2xl">
+              <p className="text-lg text-text-muted font-mono leading-relaxed">
+                <span className="text-neon-green">&gt;</span>{' '}
+                <TypewriterText text={resumeData.bio} delay={600} />
+              </p>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link href="/projects">[VIEW_PROJECTS]</Link>
+              </Button>
+              <Button variant="outline" asChild size="lg">
+                <Link href="/contact">[INIT_CONTACT]</Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* HUD Stats with animated counters */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid gap-4 sm:grid-cols-3"
+          >
+            {stats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                variants={itemVariants}
+                className="hud-panel px-5 py-5 group hover:border-neon-green/30 transition-all"
               >
-                <span className="mt-1 h-2 w-2 rounded-full bg-gradient-to-br from-teal-300 to-amber-200" />
-                <p>{focus}</p>
-              </div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-mono">{stat.label}</p>
+                <p className={`mt-2 font-heading text-3xl font-bold ${stat.color}`}>
+                  <AnimatedCounter target={stat.numValue} prefix={stat.prefix} suffix={stat.suffix} decimals={stat.decimals} delay={800 + i * 200} />
+                  <span className="text-base font-mono text-text-muted">{stat.unit}</span>
+                </p>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900/60 px-4 py-4">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Recent roles</p>
-            <div className="mt-3 space-y-3">
-              {featuredExperience.map((role) => (
-                <div key={role.company} className="flex items-center justify-between text-sm text-slate-200">
-                  <div>
-                    <p className="font-semibold text-white">{role.company}</p>
-                    <p className="text-slate-400">{role.role}</p>
-                  </div>
-                  <p className="text-xs text-slate-500">
-                    {role.start_date} - {role.end_date}
-                  </p>
-                </div>
+          {/* Interactive Terminal — front and center */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <p className="text-[10px] uppercase tracking-[0.3em] text-text-muted font-mono mb-3">
+              // INTERACTIVE_TERMINAL — type &quot;help&quot; to explore
+            </p>
+            <InteractiveTerminal />
+          </motion.div>
+
+          {/* Arsenal */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="hud-panel px-6 py-5"
+          >
+            <p className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-mono mb-3">// PRIMARY_ARSENAL</p>
+            <div className="flex flex-wrap gap-2">
+              {arsenal.map((tech, i) => (
+                <Badge key={tech} variant={i === 0 ? 'accent' : 'default'}>
+                  {tech}
+                </Badge>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
 
-      {featuredLogos.length > 0 && (
-        <div className="glass-panel subtle-grid overflow-hidden px-6 py-5">
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Brands shipped for</p>
-          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-            {featuredLogos.map((project) => (
-              <div
-                key={project.name}
-                className="flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-3 py-3"
-              >
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  width={160}
-                  height={80}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
+          {/* Mission Log Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            className="terminal-panel px-6 py-5 space-y-3"
+          >
+            <p className="text-[10px] uppercase tracking-[0.2em] text-text-muted font-mono">// RECENT_MISSIONS</p>
+            {resumeData.experience.slice(0, 5).map((role) => (
+              <div key={role.company} className="flex items-center justify-between border-b border-border/50 pb-3 last:border-0 last:pb-0">
+                <div>
+                  <p className="text-sm font-mono text-neon-green">{role.company}</p>
+                  <p className="text-xs text-text-muted font-mono">{role.role}</p>
+                </div>
+                <p className="text-[10px] text-text-muted font-mono">
+                  {role.start_date} — {role.end_date}
+                </p>
               </div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </section>
       )}
-    </section>
+    </>
   );
 }
