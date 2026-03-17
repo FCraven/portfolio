@@ -1,4 +1,4 @@
-# CLAUDE.md — Portfolio
+# CLAUDE.md — Portfolio (CRAVEN_OS)
 
 > Primary context document for AI-assisted work on this repo.
 > Read this first every session.
@@ -7,12 +7,11 @@
 
 ## What This Is
 
-Francis P. Craven's personal developer portfolio site. Showcases his experience, projects, and skills to potential employers and clients.
+Francis P. Craven's personal developer portfolio — redesigned as **CRAVEN_OS**, a retro-futuristic terminal-themed portfolio that *is* the proof of engineering skill rather than just describing it.
 
+**Live URL:** Deployed on Vercel (default URL — custom domain pending)
+**GitHub:** `FCraven/portfolio` — `main` branch
 **Owner:** Francis Craven — craven.francis@gmail.com
-**GitHub:** https://github.com/FCraven
-**LinkedIn:** https://www.linkedin.com/in/francis-craven-ab1029b3
-**Live URL (pending):** TBD — needs deployment
 
 ---
 
@@ -21,101 +20,128 @@ Francis P. Craven's personal developer portfolio site. Showcases his experience,
 | Layer | Tool | Version |
 |---|---|---|
 | Framework | Next.js | ^16.0.10 |
-| UI Library | React | ^19.2.3 |
+| UI | React | ^19.2.3 |
 | Styling | Tailwind CSS | ^3.4.19 |
-| 3D | @react-three/fiber + drei | ^9 / ^10 |
+| Animation | Framer Motion | — |
 | Icons | FontAwesome, react-icons, Heroicons | various |
-| Components | Custom + Radix UI primitives | — |
-| Language | JavaScript (not TypeScript yet) | — |
-| Build | Next.js built-in | — |
+| UI Primitives | Custom (cva-based) | — |
+| Language | JavaScript (.js — TypeScript migration planned) | — |
+
+> Three.js deps were removed (`@react-three/fiber`, `@react-three/drei` — 59 packages). Re-add if a 3D scene is needed later.
 
 ---
 
-## Project Structure
+## Design System — CRAVEN_OS v1.0
 
-```
-src/app/
-├── page.js              ← Homepage (hero, stats, experience preview, brand logos)
-├── layout.js            ← Root layout, fonts, global styles
-├── globals.css          ← Tailwind base + custom glass-panel / subtle-grid utilities
-├── resumeData.js        ← ALL content lives here — edit this to update the site
-├── about/page.js        ← About page
-├── projects/page.js     ← Projects & experience deep-dive
-├── contact/page.js      ← Contact form
-├── components/
-│   ├── Navbar.js
-│   ├── Footer.js
-│   ├── MobileMenu.js
-│   ├── ThemeToggle.js
-│   ├── Chip.js
-│   └── ui/              ← badge.js, button.js, card.js (custom shadcn-style)
-└── utils/
-    └── iconMapping.js   ← Maps icon name strings to react-icons components
+**Color tokens** (CSS custom properties in `globals.css`, mirrored in `tailwind.config.js`):
+
+```css
+--void:          #0A0A0F   /* background */
+--neon-green:    #00FF88   /* primary accent */
+--neon-cyan:     #00D4FF   /* secondary accent */
+--neon-magenta:  #FF00FF   /* tertiary accent */
+--surface:       #12121A   /* card backgrounds */
+--text-primary:  #E0E0E0
+--text-muted:    #888888
+--border:        #1E1E2E
 ```
 
+**Fonts** (via `next/font/google`):
+- `--font-orbitron` — headings, display text
+- `--font-jetbrains` — body, mono, terminal text
+
+**Custom CSS components** (`globals.css`):
+- `.terminal-panel` — dark bordered card with subtle glow
+- `.hud-panel` — card with animated corner brackets (::before/::after)
+- `.neon-text` — green text-shadow glow
+- `.scanlines` — full-screen CRT scanline overlay
+- `.cyber-grid` — subtle background grid pattern
+- `.typing-cursor` — blinking underscore
+- `.custom-cursor` — crosshair cursor site-wide
+
+**Animations** (Tailwind + CSS keyframes):
+- `glow-pulse` — pulsing green dot for "ACTIVE" status
+- `glitch` — chromatic aberration text effect
+- `float` — gentle vertical bobbing
+- `blink` — cursor blink
+
 ---
 
-## Content Architecture
+## Architecture
 
-**All site content lives in `resumeData.js`.** To update anything — job titles, achievements, tech stacks, projects — edit that file. Don't hardcode content in page components.
+**Golden rule: ALL content lives in `src/app/resumeData.js`.** Pages read from it. Never hardcode content in components.
+
+**Key resumeData fields:**
+- `name`, `handle`, `email`, `github`, `linkedin`
+- `tagline`, `bio`, `status`
+- `experience[]` — `company`, `codename`, `role`, `start_date`, `end_date`, `brief`, `techStack[]`, `projects[]`, `impact[]`, `image`
+- `education[]`, `skills{}` (categorized)
+
+**Component tree:**
+```
+layout.js
+├── MatrixRain.js              — Canvas falling green chars background
+├── KonamiCode.js              — ↑↑↓↓←→←→BA easter egg
+├── ConsoleMessage.js          — Dev console easter egg
+├── Navbar.js                  — Terminal-style nav
+└── pages
+    ├── page.js (home)         — boot → hero → stats → terminal → arsenal → missions
+    │   ├── BootSequence.js    — Timed system boot (sessionStorage skip on revisit)
+    │   ├── GlitchText.js      — Hover glitch with cyan/magenta split
+    │   ├── InteractiveTerminal.js — Working terminal (help, whoami, skills, missions...)
+    │   ├── TypewriterText     — Types out bio char by char
+    │   └── AnimatedCounter    — Counts up stats with easing
+    ├── about/page.js          — System README style, skills grid, status readout
+    ├── projects/page.js       — Mission cards with codenames, tech stacks, impact logs
+    └── contact/page.js        — Connection channels, status terminal
+```
+
+**Icon mapping:** `utils/iconMapping.js` maps string names (`"SiReact"`) → react-icons components
+**UI primitives:** `components/ui/` — badge.js (cva), button.js (cva), card.js
 
 ---
 
-## Francis's Background (from resumeData.js)
+## Experience in resumeData (current order)
 
-**Current:** B.S. Computer Science, CUNY Queens College (Sep 2023 – Present)
+1. **SeaRaven Studios** — OPERATION: AGENCY BUILD (Jan 2026–Present)
+2. **Total Hemp** — OPERATION: GREEN MARKET (Dec 2025–Present)
+3. **Digital Fuel Capital** — OPERATION: COMMERCE ENGINE (Apr 2022–Jul 2023)
+4. **Smile Direct Club** — OPERATION: BRICK & MORTAR (Aug 2021–Mar 2022)
+5. **2U | edX** — OPERATION: KNOWLEDGE TRANSFER (Mar 2019–Aug 2021)
 
-**Experience:**
-1. **Digital Fuel Capital** — Front End Engineer (Apr 2022 – Jul 2023)
-   - Shopify, React.js, Node.js, Webpack, Gulp, Grunt, Git, Google Analytics
-   - Led technical work across 4 women's fashion eCommerce brands
-   - Monthly revenue influenced: **$1.5M/month**
-   - Lighthouse score improvement: 3 → 55 for Lime Lush, -12% bounce rate
-   - Brands: Boutique Brands, LimeLush, Filly Flair, Nana Macs, Discount Divas
+---
 
-2. **Smile Direct Club** — Front End Developer (Aug 2021 – Mar 2022)
-   - Nuxt.js, Vue.js, Vuetify, Contentful CMS, Storybook, Google Maps
-   - Built Brick & Mortar Locator feature
+## Easter Eggs (3 layers)
 
-3. **2U | edX** — Web Development Educator (Mar 2019 – Aug 2021)
-   - Taught full-stack JS to **350+ developers**
-   - HTML/CSS/JS/React/Redux/Node/Express/MongoDB/SQL/PostgreSQL/AWS
+1. **Konami Code** (`KonamiCode.js`) — ↑↑↓↓←→←→BA → ASCII "CRAVEN" art + "+30 LIVES UNLOCKED"
+2. **Footer hint** — `↑ ↑ ↓ ↓ ← → ← → B A` at 40% opacity
+3. **Console message** (`ConsoleMessage.js`) — ASCII banner + "You found the console. Nice. 👀"
 
-**Skills:**
-- Languages: JS, TypeScript, HTML5, CSS3, C++, Java, SQL
-- Front End: React, Redux, React Native, Vue.js, Next.js, Nuxt.js
-- UI: Bootstrap, Tailwind, MaterialUI, styled-components
-- Back End: Node.js, Express, GraphQL, MongoDB, MySQL, PostgreSQL, REST API
-- Tools: AWS, GCP, Webpack, Gulp, Git, Postman, Figma, Jira, Storybook, Shopify, Agile/Scrum
-- Testing: Jest, Vitest, Chai, Mocha, Enzyme, @testing-library, Jasmine
+---
+
+## Public Assets
+
+```
+/public/dfc/     — Digital Fuel Capital brand logos
+/public/sdc/     — Smile Direct Club assets
+/public/edX/     — 2U / edX assets
+```
 
 ---
 
 ## Active Priorities (as of March 2026)
 
-1. **Add Total Hemp as a featured project** — This is the most impressive thing in the portfolio. Production-grade Medusa build with loyalty, CRM, fulfillment, compliance. Add it to `resumeData.js` once launched.
-2. **Add SeaRaven Studios** — The agency itself is a project/achievement.
-3. **Deploy to Vercel** — Not live yet. Get it up.
-4. **TypeScript migration** — Currently `.js`. Worth doing for credibility as a senior dev.
-5. **Add Three.js scene** — `@react-three/fiber` is in the deps but may not be used yet. Check `projects/page.js`.
+1. Wire contact form to Formspree or Resend
+2. Point custom domain (franciscraven.dev or similar)
+3. TypeScript migration (everything is .js currently)
+4. Add Three.js scene if desired later (deps were removed — need re-adding)
 
 ---
 
-## Important Notes for AI Work
+## Rules
 
-- **Edit `resumeData.js` for all content changes.** Page components read from it.
-- **`iconMapping.js`** maps string names like `"SiReact"` to actual react-icons components — used in the tech stack chips.
-- **Glass-panel utility** is defined in `globals.css` — a frosted glass card style used throughout.
-- **`subtle-grid` utility** is a CSS grid background overlay for visual texture on cards.
-- The site has dark mode support via `ThemeToggle.js` — test any new components in both modes.
-- **Public assets** are in `/public/dfc/`, `/public/sdc/`, `/public/edX/` — one folder per employer.
-
----
-
-## What Needs Work (honest assessment)
-
-- Needs Total Hemp + SeaRaven Studios added to showcase current work
-- Projects page likely has older/student projects — worth auditing
-- No live URL yet (deploy it!)
-- `.js` throughout — TypeScript migration would strengthen credibility
-- Contact form may not be wired to anything (check `contact/page.js`)
+- Edit `resumeData.js` for ALL content changes
+- Test after changes — boot sequence, terminal commands, Konami code
+- Never commit directly to `main` — feature branch → PR
+- Commit messages: keep short (Francis preference)
+- Public assets per employer in `/public/<employer-slug>/`

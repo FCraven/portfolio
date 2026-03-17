@@ -22,6 +22,7 @@
 
 # claude
 .claude/
+MEMORY.md
 
 # debug
 npm-debug.log*
