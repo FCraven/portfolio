@@ -2,30 +2,30 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Transition } from '@headlessui/react';
 import { HiMenu, HiX } from 'react-icons/hi';
 
 const defaultLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'home' },
+  { href: '/about', label: 'about' },
+  { href: '/projects', label: 'projects' },
+  { href: '/contact', label: 'contact' },
 ];
 
 export default function MobileMenu({ links = defaultLinks }) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen((current) => !current);
+  const pathname = usePathname();
 
   return (
-    <div className="sm:hidden relative">
+    <div className="relative">
       <button
-        onClick={toggleMenu}
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/10 text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
+        onClick={() => setIsOpen((c) => !c)}
+        className="flex h-10 w-10 items-center justify-center rounded border border-border bg-surface text-neon-green transition hover:border-neon-green/40 hover:shadow-[0_0_15px_rgba(0,255,136,0.15)] cursor-pointer"
         aria-label="Toggle mobile menu"
         type="button"
       >
-        {isOpen ? <HiX size={22} /> : <HiMenu size={22} />}
+        {isOpen ? <HiX size={20} /> : <HiMenu size={20} />}
       </button>
 
       <Transition
@@ -37,31 +37,44 @@ export default function MobileMenu({ links = defaultLinks }) {
         leaveFrom="translate-x-0 opacity-100"
         leaveTo="translate-x-full opacity-0"
       >
-        <div className="fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs border-l border-white/20 bg-slate-950 px-6 py-8 shadow-[0_24px_90px_rgba(2,6,23,0.85)]">
+        <div className="fixed inset-y-0 right-0 z-50 w-[78%] max-w-xs border-l border-border bg-void px-6 py-8 shadow-[0_0_60px_rgba(0,255,136,0.05)]">
           <div className="flex items-center justify-between">
-            <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Navigate</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-text-muted font-mono">// NAVIGATE</p>
             <button
-              onClick={toggleMenu}
-              className="text-slate-200 transition hover:text-white"
+              onClick={() => setIsOpen(false)}
+              className="text-neon-green transition hover:text-white cursor-pointer"
               aria-label="Close mobile menu"
               type="button"
             >
-              <HiX size={22} />
+              <HiX size={20} />
             </button>
           </div>
 
-          <nav className="mt-8 flex flex-col gap-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-2xl border border-white/15 bg-slate-900 px-4 py-3 text-base font-semibold text-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-teal-300/60 hover:text-white hover:shadow-[0_16px_60px_rgba(45,212,191,0.28)]"
-                onClick={toggleMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav className="mt-8 flex flex-col gap-2">
+            {links.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded border px-4 py-3 font-mono text-sm transition cursor-pointer ${
+                    isActive
+                      ? 'border-neon-green/40 bg-neon-green/5 text-neon-green'
+                      : 'border-border bg-surface text-text-muted hover:border-neon-green/30 hover:text-neon-green'
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <span className="text-neon-green/60 mr-2">&gt;</span>
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
+
+          <div className="mt-8 border-t border-border pt-4">
+            <p className="text-[10px] text-text-muted font-mono">CRAVEN_OS v1.0</p>
+            <p className="text-[10px] text-text-muted font-mono mt-1">SYS.STATUS: <span className="text-neon-green">ONLINE</span></p>
+          </div>
         </div>
       </Transition>
     </div>

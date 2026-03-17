@@ -1,41 +1,111 @@
-@import '@fortawesome/fontawesome-svg-core/styles.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #05080f;
-  --foreground: #e2e8f0;
-  --accent: #2dd4bf;
-  --accent-strong: #f8c537;
+  --void: #0A0A0F;
+  --surface: #12121A;
+  --surface-light: #1C1C2E;
+  --neon-green: #00FF88;
+  --neon-cyan: #00D4FF;
+  --neon-magenta: #FF00FF;
+  --text-primary: #E0E0E0;
+  --text-muted: #5A5A7A;
+  --border: #2A2A3A;
 }
 
 @layer base {
   * {
-    @apply selection:bg-teal-300/30 selection:text-white;
+    @apply selection:bg-[#00FF88]/20 selection:text-[#00FF88];
   }
 
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)] font-sans tracking-tight;
+    @apply bg-[var(--void)] text-[var(--text-primary)] font-mono tracking-wide;
   }
 
   a {
-    @apply transition-colors duration-200;
+    @apply transition-all duration-200;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-green);
   }
 }
 
 @layer components {
-  .glass-panel {
-    @apply rounded-3xl border border-white/10 bg-white/5 shadow-[0_24px_120px_rgba(0,0,0,0.45)] backdrop-blur-2xl;
+  .terminal-panel {
+    @apply rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-[0_0_30px_rgba(0,255,136,0.03)];
   }
 
-  .menu-panel {
-    @apply bg-slate-950/80 border-white/15 shadow-[0_18px_80px_rgba(2,6,23,0.72)];
+  .hud-panel {
+    @apply relative rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden;
+  }
+  .hud-panel::before {
+    content: '';
+    @apply absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[var(--neon-green)] pointer-events-none;
+  }
+  .hud-panel::after {
+    content: '';
+    @apply absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[var(--neon-green)] pointer-events-none;
   }
 
-  .subtle-grid {
-    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 22px 22px;
+  .neon-text {
+    text-shadow:
+      0 0 7px var(--neon-green),
+      0 0 20px rgba(0, 255, 136, 0.3),
+      0 0 40px rgba(0, 255, 136, 0.1);
+  }
+
+  .neon-text-cyan {
+    text-shadow:
+      0 0 7px var(--neon-cyan),
+      0 0 20px rgba(0, 212, 255, 0.3);
+  }
+
+  .scanlines {
+    @apply pointer-events-none fixed inset-0 z-50;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 136, 0.008) 2px,
+      rgba(0, 255, 136, 0.008) 4px
+    );
+  }
+
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .typing-cursor::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@layer components {
+  /* Custom cursor */
+  .custom-cursor {
+    cursor: crosshair;
+  }
+  .custom-cursor a,
+  .custom-cursor button,
+  .custom-cursor [role="button"],
+  .custom-cursor .cursor-pointer {
+    cursor: pointer;
   }
 }
 
@@ -43,4 +113,47 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Neon hover glow for interactive elements */
+.hud-panel {
+  transition: all 0.3s ease;
+}
+.hud-panel:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.06), inset 0 0 20px rgba(0, 255, 136, 0.02);
+}
+
+.terminal-panel {
+  transition: all 0.3s ease;
+}
+.terminal-panel:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.05);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(0, 255, 136, 0.2), 0 0 20px rgba(0, 255, 136, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.4), 0 0 40px rgba(0, 255, 136, 0.2);
+  }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
