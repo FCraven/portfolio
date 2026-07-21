@@ -3,7 +3,7 @@ import { publishedPosts } from "./journal/posts";
 const BASE = "https://www.franciscraven.com";
 
 export default function sitemap() {
-  const staticRoutes = ["", "/about", "/projects", "/contact", "/journal"].map(
+  const staticRoutes = ["", "/about", "/projects", "/contact", "/journal", "/lab"].map(
     (route) => ({
       url: `${BASE}${route}`,
       lastModified: new Date(),
