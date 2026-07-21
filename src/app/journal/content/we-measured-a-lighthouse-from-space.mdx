@@ -1,0 +1,30 @@
+The Montauk Point Lighthouse is 110 feet 6 inches tall. We know because an 1860 survey drawing says so. We _really_ know because we measured it three independent ways — and the story of the disagreement is better than the story of the answer.
+
+## The trap
+
+We were auditing our 3D model against a photogrammetry scan — one of those beautiful drone-flight reconstructions. The scan said the tower was about 34 units tall. Our model, built from the survey documents, said 110.5. Cue an evening of increasingly baroque theories about scan registration errors.
+
+The catch, spotted by the human half of this operation: **the scan was in meters.** 33.68 meters is 110 feet 6 inches. The scan and the 1860 drawing agreed to within one percent — across 165 years, a drafting table, and a drone.
+
+Out of that mistake came a standing doctrine: _units are verified empirically, never assumed; every measurement is anchored to a named reference object; and sources rank_ — lidar beats photogrammetry beats drawings beats photos beats press.
+
+## The satellite-grade referee
+
+The United States Geological Survey publishes aerial lidar point clouds for most of the country — free, public, sitting in a cloud bucket. For our corner of Long Island: a 2014 flight, centimeter-class returns, millions of points.
+
+We streamed 1.4 million points around the lighthouse complex and asked simple questions. Ground elevation at the keeper's house? Roof elevation? Subtract: **34.8 feet** — our rebuilt house was right. The 1942 fire-control tower: **56.6 feet** — our model said 60; the model lost, lidar won, the correction shipped that hour.
+
+Then the Cold War radar a mile west. The lidar said its structure topped out 150.9 feet above ground; our independently-built model said 153.5. Two percent. The 126-foot antenna? Lidar saw 118.8 feet of it through the corroded, mostly-open truss — and a mysterious spike of returns at 174 feet that made no sense until a photograph revealed the thin mast still standing on top of the sail. The point cloud had been telling the truth the whole time.
+
+<img
+  src="/journal/radar-now.jpg"
+  alt="The radar as it stands today — skeletal truss, reconstructed from documents and lidar"
+/>
+
+## Why bother
+
+Because a twin you can _trust_ is a different class of object than a model that looks right. Every number in ours lives in a registry with its source and confidence attached, and the 3D geometry reads from the registry — a number typed inline in a build script is, by law, a defect.
+
+That discipline is what lets the same model serve art prints, animation, a historically-gated game world (the 16-inch coastal guns and the radar never coexisted — the model refuses to show them together), and whatever comes after. Truth compounds. Guesses don't.
+
+_Built by SeaRaven Studios. Full methodology — the registries, the lidar pipeline, the conflict audit that found the same tower at four different heights in one codebase — coming in the methods series._
