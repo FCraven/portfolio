@@ -11,6 +11,13 @@ export const wallMeta = {
 
 export const onTheBench = [
   {
+    tag: "BENCH-0 \u00b7 the lighthouse itself \u00b7 block by block",
+    image: "/lab/lighthouse_hero.jpg",
+    imageAlt: "Montauk Point Lighthouse prefab \u2014 4,192 individual masonry blocks",
+    note: "The crown jewel, built the way it was built: 4,192 individual sandstone blocks laid in octagonal coursed ashlar to the 1860 specification, true window openings through eight-foot walls, 137 iron steps spiraling inside, and the lantern ironwork seated on a lidar-verified datum.",
+  },
+
+  {
     tag: "BENCH-1 · AN/FPS-35 radar · two era states",
     image: "/lab/radar_active.jpg",
     imageAlt: "Camp Hero radar prefab, active era — checkerboard mesh sail",
