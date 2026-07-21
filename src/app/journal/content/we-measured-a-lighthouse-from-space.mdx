@@ -1,0 +1,24 @@
+The Montauk Point Lighthouse is 110 feet 6 inches tall. We know because an 1860 survey drawing says so. We *really* know because we measured it three independent ways — a 165-year-old drafting table, a modern drone photogrammetry scan, and an aerial lidar point cloud — and all three agree to within one percent.
+
+That redundancy is the point. Early in the project we set a standing doctrine for the digital twin: every measurement is anchored to a named reference object, every unit system is verified empirically before a number enters the record, and sources rank — *lidar beats photogrammetry beats drawings beats photos beats press*. When three chains of evidence that share no equipment, no era, and no failure modes land on the same number, you stop modeling a guess and start modeling a fact.
+
+## The satellite-grade referee
+
+The United States Geological Survey publishes aerial lidar point clouds for most of the country — free, public, sitting in a cloud bucket. For our corner of Long Island: a 2014 flight, centimeter-class returns, millions of points.
+
+We streamed 1.4 million points around the lighthouse complex and asked simple questions. Ground elevation at the keeper's house? Roof elevation? Subtract: **34.8 feet** — our rebuilt house was right. The 1942 fire-control tower: **56.6 feet** — our model said 60; the model lost, lidar won, the correction shipped that hour.
+
+Then the Cold War radar a mile west. The lidar said its structure topped out 150.9 feet above ground; our independently-built model said 153.5. Two percent. The 126-foot antenna? Lidar saw 118.8 feet of it through the corroded, mostly-open truss — and a mysterious spike of returns at 174 feet that made no sense until a photograph revealed the thin mast still standing on top of the sail. The point cloud had been telling the truth the whole time.
+
+<img
+  src="/journal/radar-now.jpg"
+  alt="The radar as it stands today — skeletal truss, reconstructed from documents and lidar"
+/>
+
+## Why bother
+
+Because a twin you can _trust_ is a different class of object than a model that looks right. Every number in ours lives in a registry with its source and confidence attached, and the 3D geometry reads from the registry — a number typed inline in a build script is, by law, a defect.
+
+That discipline is what lets the same model serve art prints, animation, a historically-gated game world (the 16-inch coastal guns and the radar never coexisted — the model refuses to show them together), and whatever comes after. Truth compounds. Guesses don't.
+
+_Built by SeaRaven Studios. Full methodology — the registries, the lidar pipeline, the conflict audit that found the same tower at four different heights in one codebase — coming in the methods series._
