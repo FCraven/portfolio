@@ -4,6 +4,16 @@
 
 const posts = [
   {
+    slug: "the-lighthouse-brick-by-brick",
+    title: "The Lighthouse, Brick by Brick",
+    codename: "OPERATION: CROWN JEWEL",
+    date: "2026-07-22",
+    dek: "3,874 blocks, 3,700 bricks, a 32-pane lantern counted from photographs — then the National Archives' 1860 drawings arrived and the tower had to answer to its own paper trail.",
+    hero: "/journal/crown-closeup.jpg",
+    tags: ["blender", "digital-twin", "archives", "surveying", "procedural"],
+    draft: false,
+  },
+  {
     slug: "ps2-to-photoreal-in-one-day",
     title: "From PS2 to Photoreal in One Day",
     codename: "OPERATION: HERO LADDER",
