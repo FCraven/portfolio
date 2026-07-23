@@ -5,8 +5,8 @@
 export const wallMeta = {
   station: "SeaRaven Foundry · Digital Montauk",
   datum: "41.0709 N · 71.8572 W · NAVD88 ft",
-  updated: "2026-07-22",
-  registrySubjects: 27,
+  updated: "2026-07-23",
+  registrySubjects: 37,
 };
 
 export const onTheBench = [
@@ -16,7 +16,7 @@ export const onTheBench = [
     imageAlt: "Montauk Point Lighthouse crown \u2014 brick frieze, pierced brackets, glass lantern",
     secondImage: "/lab/lighthouse_hero.jpg",
     secondImageAlt: "Full tower \u2014 3,874 sandstone blocks in octagonal coursed ashlar",
-    note: "Built the way it was built: 3,874 sandstone blocks in coursed ashlar, 3,700 more bricks through the frieze and watch drum, recessed panels telescoping exactly as the 1860 drawings draw them, pierced scroll brackets carrying the walkway, a 32-pane lantern counted from photographs and confirmed by the National Archives sheets \u2014 and windows placed by an 1853 keeper's survey, alternating with the spiral stair.",
+    note: "Built the way it was built: 3,874 sandstone blocks in coursed ashlar, 3,700 more bricks through the frieze and watch drum, a plumb frieze standing on eighteen counted brick courses with its panels framed in the bond itself, pierced scroll brackets carrying the walkway, a 48-pane lantern confirmed by the National Archives sheets \u2014 and windows placed by an 1853 keeper's survey, alternating with the spiral stair. Rebuilds from a bare clone with one command.",
   },
 
   {

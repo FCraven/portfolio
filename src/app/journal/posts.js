@@ -4,11 +4,21 @@
 
 const posts = [
   {
+    slug: "the-masons-arithmetic",
+    title: "The Mason's Arithmetic",
+    codename: "OPERATION: TRUE COURSE",
+    date: "2026-07-23",
+    dek: "Our lighthouse's crown looked almost right — the most dangerous kind of wrong. An 1860 wash-profile scan, one section cut, and eighteen counted brick courses later, the frieze stands plumb.",
+    hero: "/journal/crown-plumb.jpg",
+    tags: ["blender", "digital-twin", "archives", "masonry", "procedural"],
+    draft: false,
+  },
+  {
     slug: "the-lighthouse-brick-by-brick",
     title: "The Lighthouse, Brick by Brick",
     codename: "OPERATION: CROWN JEWEL",
     date: "2026-07-22",
-    dek: "3,874 blocks, 3,700 bricks, a 32-pane lantern counted from photographs — then the National Archives' 1860 drawings arrived and the tower had to answer to its own paper trail.",
+    dek: "3,874 blocks, 3,700 bricks, a 48-pane lantern counted from photographs — then the National Archives' 1860 drawings arrived and the tower had to answer to its own paper trail.",
     hero: "/journal/crown-closeup.jpg",
     tags: ["blender", "digital-twin", "archives", "surveying", "procedural"],
     draft: false,
