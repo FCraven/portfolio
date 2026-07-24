@@ -5,6 +5,8 @@ import { allPosts, getPost } from "../posts";
 // Explicit content map — registry law: posts.js is the source of truth,
 // this maps slugs to their MDX modules.
 const content = {
+  "the-keepers-hand": () =>
+    import("../content/the-keepers-hand.mdx"),
   "the-masons-arithmetic": () => import("../content/the-masons-arithmetic.mdx"),
   "the-lighthouse-brick-by-brick": () =>
     import("../content/the-lighthouse-brick-by-brick.mdx"),

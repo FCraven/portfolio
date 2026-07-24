@@ -6,13 +6,13 @@ export const wallMeta = {
   station: "SeaRaven Foundry · Digital Montauk",
   datum: "41.0709 N · 71.8572 W · NAVD88 ft",
   updated: "2026-07-23",
-  registrySubjects: 37,
+  registrySubjects: 42,
 };
 
 export const onTheBench = [
   {
     tag: "BENCH-0 \u00b7 the lighthouse itself \u00b7 block by brick",
-    image: "/lab/lighthouse_crown.jpg",
+    image: "/journal/keepers-bracket.jpg",
     imageAlt: "Montauk Point Lighthouse crown \u2014 brick frieze, pierced brackets, glass lantern",
     secondImage: "/lab/lighthouse_hero.jpg",
     secondImageAlt: "Full tower \u2014 3,874 sandstone blocks in octagonal coursed ashlar",

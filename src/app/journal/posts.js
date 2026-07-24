@@ -4,6 +4,16 @@
 
 const posts = [
   {
+    slug: "the-keepers-hand",
+    title: "The Keeper's Hand",
+    codename: "OPERATION: SACRED S",
+    date: "2026-07-23",
+    dek: "The archives drew the bracket too small and the photographs shot it too oblique — so the final curve was drawn by hand in a live viewport, faired to compass arcs, and cast eight times in iron.",
+    hero: "/journal/keepers-bracket.jpg",
+    tags: ["blender", "digital-twin", "procedural", "mcp", "ironwork"],
+    draft: false,
+  },
+  {
     slug: "the-masons-arithmetic",
     title: "The Mason's Arithmetic",
     codename: "OPERATION: TRUE COURSE",
