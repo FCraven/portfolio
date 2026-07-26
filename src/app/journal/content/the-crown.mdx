@@ -1,0 +1,105 @@
+The Montauk Point Lighthouse has stood at the eastern tip of Long Island since 1796. The drawing we work from is younger than the tower — an 1860 elevation
+from the U.S. Light House Board, the sheet that governed the raise that gave the
+tower its present height of 110 feet 6 inches. It is the single most
+authoritative image of this structure that exists. It is also, in the way of
+War-Department paper that has survived a century and a half, torn, foxed, and
+ambiguous in exactly the places we most needed it to be precise.
+
+<img
+  src="/journal/crown-lantern-hero.jpg"
+  alt="The rebuilt lantern — octagonal glazing, domed roof, ventilator ball, and X-braced gallery railing over the watch-room band"
+/>
+
+## A quarter of the tower, most of its identity
+
+The crown — the lantern and its gallery, the black glass-and-iron cap that makes
+a lighthouse a lighthouse — is only about a quarter of the tower's height and
+most of its identity. If the shaft is wrong by an inch, nobody notices. If the
+lantern is wrong, it stops being Montauk and becomes a generic lighthouse. So
+the crown is where the drawing had to be read most carefully, and where it
+fought back hardest.
+
+## What an elevation won't give you
+
+The elevation gives you the silhouette: an octagonal lantern, a domed roof, a
+ventilator ball at the apex, a gallery deck ringed by an X-braced iron railing,
+and below it the band of wide horizontal watch-room windows. What it does not
+give you, cleanly, is depth. An elevation is a flat projection — it tells you how
+tall the lantern is and how wide it reads head-on, but the glazing bars, the
+astragals that hold the glass, the exact set-back of each ring sit on faces
+turned away from you. On this sheet several of those faces are exactly where the
+paper is damaged.
+
+<img
+  src="/journal/crown-1860-sheet7.jpg"
+  alt="The 1860 lantern-base sheet — plan and elevation of side, dimensioned in feet and inches"
+/>
+
+## One verdict at a time
+
+Our rule for this project is that a number typed directly into a build script is
+a defect. Every dimension has to come from a source — a drawing, a LiDAR return,
+a photograph — and it has to be logged with which source and how confident we
+are. So the lantern couldn't be eyeballed into place. It had to be _derived_, and
+the derivation had to survive being written down.
+
+The method is a tight loop we call the eye-verdict loop. Render the current
+geometry from a fixed camera that matches the source view, set the render beside
+the 1860 sheet, and let the eye deliver exactly one verdict — the single
+most-wrong thing. Not a list. One thing. That verdict becomes one minimal change
+to the geometry, the change is re-rendered from the same fixed camera, and if the
+eye agrees it's better, the change ships and is logged as a numbered rule. Then
+the loop runs again on the next most-wrong thing. It is slow on purpose. It is
+also the only way we've found to keep a hundred small decisions from quietly
+drifting away from the truth of the drawing.
+
+## Solving the base before the glass
+
+For the lantern, the loop kept returning the same verdict: the base was wrong.
+Everything above it — the glazing courses, the roof taper, the ball — inherited
+that error and looked subtly off no matter what we did to them. So we threw out
+the base and re-solved it from the bottom up, working from the lantern-base
+sheet rather than the full elevation, rectifying the base dimensions first and
+only then rebuilding the glazing courses on a base we trusted. The torn faces
+resolved by symmetry: an octagonal lantern is eight-fold symmetric by
+construction, so a face the paper had destroyed could be recovered from the seven
+it had spared. Where the drawing was silent, geometry filled in — and got logged
+as exactly that, so we'd never mistake a reconstruction for a measurement later.
+
+<img
+  src="/journal/crown-gallery-deck.jpg"
+  alt="The gallery deck and watch-room band — catwalk grating, glazing astragals, and the flush-jointed masonry below"
+/>
+
+## The drawn-lantern audit
+
+Then came the full drawn-lantern audit: tracing the cupola, the ventilator ball,
+and the finial needle straight off the sheet, and re-deriving every lantern
+dimension we had originally built by eye against those traces. Some held. Some
+moved. The catwalk that rings the lantern got pinned to the second glazing course
+where the drawing puts it, and the gallery railing's X-braces got rebuilt to the
+spacing on the elevation rather than the spacing we'd assumed.
+
+<img
+  src="/journal/crown-brace-foot.jpg"
+  alt="The grated gallery ring and the feet of the X-braced railing, rebuilt to the elevation's spacing"
+/>
+
+## The only test that matters
+
+The crown is done now. The octagonal lantern sits on a base solved from its own
+sheet, capped by a domed roof and a ventilator ball traced from 1860 ink, ringed
+by an X-braced gallery railing at the spacing the drawing specifies, over a watch
+room banded with the wide windows the elevation shows. Set beside the drawing, it
+reads as the same object — which is the only test that matters.
+
+<img
+  src="/journal/crown-dusk.jpg"
+  alt="The finished crown lit at dusk — red-brown band, white shaft, and the lantern glowing over the Atlantic"
+/>
+
+The shaft comes next, and below it the keeper's house. But the hard quarter is
+finished, and it's finished the way the whole thing has to be finished: not
+because it looks right, but because we can point at the sheet it came from.
+
+_Built by SeaRaven Studios. The methodology series covers each arc in depth._
