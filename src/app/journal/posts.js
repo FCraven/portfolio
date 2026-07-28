@@ -4,6 +4,16 @@
 
 const posts = [
   {
+    slug: "the-crown",
+    title: "The Crown",
+    codename: "OPERATION: EIGHTFOLD",
+    date: "2026-07-25",
+    dek: "The black glass-and-iron cap is a quarter of the tower and most of its identity. The 1860 sheet that governs it is torn exactly where it needed to be precise — so the lantern was re-solved from its base up, its lost faces recovered by the octagon's eightfold symmetry, every dimension logged to the sheet it came from.",
+    hero: "/journal/crown-lantern-hero.jpg",
+    tags: ["blender", "digital-twin", "archives", "ironwork", "procedural"],
+    draft: false,
+  },
+  {
     slug: "the-keepers-hand",
     title: "The Keeper's Hand",
     codename: "OPERATION: SACRED S",
