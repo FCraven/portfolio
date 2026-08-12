@@ -1,0 +1,133 @@
+This entry starts with a life transition I am not going to write about on a
+public page. The part that belongs here is the part that is engineering: I need
+a place to live and a place to work, they need to be the same place, and that
+place needs wheels. A Ford Transit converted into a studio apartment and a
+development studio, driven through the gap between one home and the next.
+
+On 2026-08-12 I gave that idea one working day and no hardware budget. The rule
+for the day was the same rule I use on every build: nothing gets bought until
+the thing it is being bought for has a number attached to it.
+
+## The spec had to survive a grilling
+
+The first hour was not a search. It was an argument, on purpose, against my own
+preferences. Length, series, drivetrain, engine, roof, seating: each one got
+pushed until it either produced a reason or fell over.
+
+What came out the other side is narrow enough to be useful as a filter. Ford
+Transit, T-350 series for the payload headroom, factory all wheel drive, high
+roof, 148 inch regular wheelbase rather than extended so it still parks on a
+street, and the turbocharged 3.5L EcoBoost rather than the naturally aspirated
+3.5L that most of these vans are built with. A certified second row for my boys
+is a purchase specification, not a build item, because seat anchorages are one
+of the few things in a van you cannot add later in good conscience.
+
+The wheelbase argument is the one I expect to reopen. The build program presses
+against 148 inches and street parking presses back, and I would rather have that
+fight in a model than in a parking spot.
+
+## A ledger before a shopping list
+
+The second decision of the day was that this project runs on ledgers rather than
+on a shopping list. Every part carries a weight, a price and a watt-hour cost,
+and it enters the record at the moment it is chosen, not after it is installed.
+A van conversion is a payload budget wearing a floor plan.
+
+The electrical design is where that discipline paid first. The load came before
+the battery: a parked working day burns about 4.8 kWh, the development rig and
+the satellite link being about half of it, and winter turns out to land within 25 Wh
+of summer because the heater burns gasoline rather than amps. Craven's Caravans
+priced 3 complete electrical tiers at $4,893, $8,346 and $13,892 before buying a
+single component, and the middle one wins: 920Ah of Victron, about 350 pounds,
+2 full winter working days of autonomy.
+
+The number I liked least is the one that changed the plan. Weekly use is roughly
+33 kWh against about 12 kWh of realistic summer recovery from driving and solar,
+which means a parked van runs a daily deficit no battery chemistry argues its way
+out of. So winter ski trips are shore power trips, and the roof mounted air
+conditioner gets deferred behind one summer of real telemetry instead of being
+bought on a feeling. The circuit for it gets run anyway while the walls are open.
+
+## Five phases, and a van that always drives
+
+The build plan is staggered by necessity rather than by tidiness. Sound
+deadening, every roof penetration in a single sealing campaign, insulation,
+floor, then the electrical spine, then water, then the living machine. Two
+laws hold it together: everything that is easier in an empty van happens before
+anything covers a wall, and every phase ends with a van that still drives and
+still camps. Weigh empty, weigh after the electrical, weigh at the end.
+
+## A room with three people in it
+
+My sister is in this project properly, which meant she needed the same view of
+it that I have rather than a summary of it after the fact. That turned into 192
+lines of Node with no dependencies: a long poller against the Telegram API, a
+sender behind an operations gate, and a launchd service so it survives a reboot
+without me thinking about it. Messages land in a JSONL inbox that gets read at
+the start of every session.
+
+It went live at 16:34 that afternoon. The first message in the group was two
+words: "The beginning."
+
+## The argument needed a model
+
+The wheelbase question, the roof real estate question, the where does the wet
+bath go question: all three are spatial arguments, and spatial arguments held in
+prose go in circles. So the last thing built that day was the thing that lets
+the arguments end.
+
+<img
+  src="/journal/caravans-configurator.jpg"
+  alt="The van configurator: a wireframe Transit shell in neon green with labelled module volumes for the elevator bed, wet bath, galley, dev desk and electrical cabinet, and live weight, cost and power ledgers"
+/>
+
+It is a parametric Transit shell in React Three Fiber, both wheelbase variants,
+with the build program expressed as 8 typed modules you drag onto a 1 inch grid.
+Every module carries its real weight, its real cost and its real average draw,
+and three ledgers total live: weight against the series payload, cost against the
+build cap, watts as a running load. Footprint collisions light up amber. An
+exploded view pulls the whole interior apart. The layout persists, so a session
+survives closing the tab.
+
+It is a private tool for one van right now, and it is deliberately a drawing
+board rather than a product. Whether it becomes one depends on whether it
+survives being used to build this van, which is the only evidence that would
+count.
+
+## One van in the country
+
+The specification is narrow, and narrow specifications are worth checking against
+supply before falling in love with them. The national pool of Transit 350 all
+wheel drive high roofs on this wheelbase holds roughly 16 to 20 units at any
+given moment, priced from $29,000 to $58,000, and buyers outnumber vans.
+
+The engine is the filter that does the work. Most all wheel drive Transits carry
+the naturally aspirated engine, and position 8 of the VIN tells you which one you
+are looking at in about ten seconds, which is a great deal cheaper than finding
+out at the dealership. Craven's Caravans searched the whole country and came back
+with 1 retail van whose engine is confirmed by its VIN, a 2023 T-350 with 31,988
+miles at $42,995 sitting outside Detroit. There is a second one, an ex-municipal auction van carrying a replacement
+engine with about 8,000 miles on it, closing tomorrow morning.
+
+## How the day was actually run
+
+Most of that day I spent deciding rather than typing. The grilling, the ledger
+discipline, the ruling that the national search was worth a flight, the call to
+defer the air conditioner, the choice to build the configurator before buying
+the van: those are the day's actual content, and none of them are automatable
+because each one is a trade I have to live inside.
+
+What made the volume possible is that the research, the sweeps and the
+scaffolding ran in parallel while I worked the decisions. Agents are extremely
+good at going and finding out, and extremely bad at knowing which answer you can
+afford. The bottleneck in a day like this is judgment, and the way you get more
+out of the day is to stop spending judgment on retrieval.
+
+The van is not bought. The auction closes in the morning, the wire has not
+landed, and the wheelbase argument is still open. But there is a specification
+with reasons behind it, a power design with a bill of materials, a build plan
+with a calendar, a room where three of us can talk, and a model to argue in. The
+van is the last thing that shows up, and that is the correct order.
+
+_Craven's Caravans is a personal build. This journal follows it from empty shell
+to livable studio._
