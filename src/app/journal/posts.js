@@ -4,6 +4,22 @@
 
 const posts = [
   {
+    slug: "the-van-before-the-van",
+    title: "The Van Before the Van",
+    codename: "OPERATION: UNICORN",
+    date: "2026-08-12",
+    dek: "Craven's Caravans is a van conversion program, and day one produced a VIN-verified purchase candidate, a 920Ah electrical design costed to $8,346, a five-phase build plan and a working 3D configurator.",
+    hero: "/journal/caravans-configurator.jpg",
+    tags: [
+      "three-js",
+      "react-three-fiber",
+      "systems-design",
+      "van-build",
+      "tooling",
+    ],
+    draft: false,
+  },
+  {
     slug: "the-crown",
     title: "The Crown",
     codename: "OPERATION: EIGHTFOLD",
