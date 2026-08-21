@@ -3,9 +3,11 @@
 // declared here. Update this + /public/lab images to refresh the wall.
 
 export const wallMeta = {
-  station: "SeaRaven Foundry · Digital Montauk",
-  datum: "41.0709 N · 71.8572 W · NAVD88 ft",
-  updated: "2026-08-04",
+  station: "SeaRaven Foundry",
+  blurb:
+    "The workshop wall. Two programs are on the bench: Digital Montauk, a survey-accurate digital twin of the point built in public, and client work in survey-grade 3D and scroll-driven film. This wall shows what is on the bench right now.",
+  datum: "Digital Montauk · 41.0709 N · 71.8572 W · NAVD88 ft",
+  updated: "2026-08-21",
   registrySubjects: 236,
 };
 
@@ -18,7 +20,18 @@ export const onTheBench = [
     secondImage: "/lab/tower_west_calibrated.jpg",
     secondImageAlt:
       "West elevation bench \u2014 render-calibrated daymark band on the fixed instrument",
-    note: "The bar: a render a Montauk local cannot tell from a photograph \u2014 nothing ships as product below it. The machinery: ninety-five numbered verdicts from a human eye, each cross-checked against the 1860s drawings before geometry moves; a 24-agent adversarial audit tracing every builder constant to its registry source; paint calibrated in a closed loop against reference photographs to 1.3%; a structural-similarity instrument that localizes every change. The drawings keep winning arguments \u2014 the walkway pattern the eye flagged turned out to be cast into the 1860 segment plan all along.",
+    note: "The bar: a render a Montauk local cannot tell from a photograph, and nothing ships as product below it. The machinery: 102 numbered verdicts from a human eye, each cross-checked against the 1860s drawings before geometry moves; a 24-agent adversarial audit tracing every builder constant to its registry source; paint calibrated in a closed loop against reference photographs to 1.3%; a structural-similarity instrument that localizes every change. The claim is now under a sealed test rather than an opinion: a two-alternative forced-choice kit frozen on 2026-08-13, 4 scored pairs and 2 catch trials, answers never stored but re-derived from a seed at scoring time so that opening the kit is itself recorded. The drawings keep winning arguments; the walkway pattern the eye flagged turned out to be cast into the 1860 segment plan all along.",
+  },
+
+  {
+    tag: "BENCH-4 \u00b7 the road film \u00b7 client work",
+    image: "/lab/road_film_corridor.jpg",
+    imageAlt:
+      "A night street rendered live in three.js, lit frontages stacked in depth on both sides, the road the only thing lit toward the vanishing point",
+    secondImage: "/lab/road_film_nadir.jpg",
+    secondImageAlt:
+      "A pre-rendered descent plate: straight down over a lit city grid against dark water",
+    note: "A four act film you scroll, shipped 2026-08-20 for a wellness education practice. One scroll scalar owns everything: 133 pre-rendered plates fall toward the city, 41 more stand the camera up out of the fall, and a live three.js corridor carries the last 55% of the page to a horizon. The join between the two plate sequences is a hard cut because it was measured at 1.72 of 255, against ordinary neighbouring steps of 11.12 and 22.07, so a cross fade would have hidden nothing. The pacing was fixed by inverting a flow measurement rather than by feel, and the plate-to-live seam was placed by photographing it in three layers at every step of its window.",
   },
 
   {
@@ -80,7 +93,7 @@ export const phases = [
   {
     name: "1 · Prefab workshop",
     state: "now",
-    note: "radar at documents grade; lighthouse mid-campaign — 95 verdicts, adversarial audits",
+    note: "radar at documents grade; lighthouse mid-campaign, 102 verdicts, adversarial audits",
   },
   {
     name: "2 · Assembler",

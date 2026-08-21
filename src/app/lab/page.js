@@ -26,13 +26,10 @@ export default function LabPage() {
         <h1 className="font-display text-3xl sm:text-4xl text-text-primary tracking-wide">
           THE LAB
         </h1>
-        <p className="text-text-muted max-w-prose">
-          {wallMeta.station} — a survey-accurate digital twin of Montauk Point,
-          built in public. This wall shows what is on the bench right now.
-        </p>
+        <p className="text-text-muted max-w-prose">{wallMeta.blurb}</p>
         <p className="text-xs font-mono text-text-muted tabular-nums">
-          {wallMeta.datum} · registry {wallMeta.registrySubjects} subjects ·
-          updated {wallMeta.updated}
+          {wallMeta.station} · {wallMeta.datum} · registry{" "}
+          {wallMeta.registrySubjects} subjects · updated {wallMeta.updated}
         </p>
       </div>
 
@@ -115,7 +112,7 @@ export default function LabPage() {
 
       <div className="space-y-4">
         <h2 className="font-display text-sm tracking-[0.25em] text-text-muted uppercase">
-          Build status
+          Build status · Digital Montauk
         </h2>
         <div className="terminal-panel rounded-lg border border-border overflow-x-auto">
           <table className="w-full text-sm">

@@ -1,29 +1,32 @@
-import { Orbitron, JetBrains_Mono } from 'next/font/google';
+import { Orbitron, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import MatrixRain from './components/MatrixRain';
-import KonamiCode from './components/KonamiCode';
-import ConsoleMessage from './components/ConsoleMessage';
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import MatrixRain from "./components/MatrixRain";
+import KonamiCode from "./components/KonamiCode";
+import ConsoleMessage from "./components/ConsoleMessage";
 
 const orbitron = Orbitron({
-  subsets: ['latin'],
-  variable: '--font-orbitron',
-  display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ["latin"],
+  variable: "--font-orbitron",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-jetbrains',
-  display: 'swap',
-  weight: ['400', '500'],
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.franciscraven.com"),
   title: "CRAVEN_OS // Francis Craven",
-  description: "Front-end systems architect. Commerce engines. Developer education. Built with code, caffeine, and conviction.",
-  keywords: 'Francis Craven, Front-End Engineer, Portfolio, React, Next.js, Commerce, Shopify',
+  description:
+    "Front-end systems architect. Commerce engines. Developer education. Built with code, caffeine, and conviction.",
+  keywords:
+    "Francis Craven, Front-End Engineer, Portfolio, React, Next.js, Commerce, Shopify",
 };
 
 export default function RootLayout({ children }) {
@@ -42,7 +45,9 @@ export default function RootLayout({ children }) {
         <KonamiCode />
         <ConsoleMessage />
         <Navbar />
-        <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-10">{children}</main>
+        <main className="flex-grow pt-24 pb-16 px-4 sm:px-6 lg:px-10">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

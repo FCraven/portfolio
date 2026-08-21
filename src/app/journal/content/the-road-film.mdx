@@ -1,0 +1,184 @@
+A client site for a wellness education and coaching practice needed an opening
+that did more than decorate. What shipped on 2026-08-20 is a four act film you
+scroll: the camera falls out of the night sky toward a city, stands up out of
+that fall to look along a street, travels the street at eye height, and arrives
+at a horizon the page then rises out of.
+
+The film is the argument rather than the wrapping. A fall is something that
+happens to you. A road is something you travel. That distinction is the whole
+reason the camera had to learn a new move.
+
+<img
+  src="/journal/road-film-corridor.jpg"
+  alt="Act 3 of the road film: a night street rendered live in three.js, lit frontages stacked in depth on both sides, the road itself the only thing lit toward the vanishing point"
+/>
+
+## One number owns everything
+
+There is exactly one scroll scalar. A single ScrollTrigger writes it, and every
+other part of the film reads it: which plate is on the canvas, which sequence
+owns the frame, where the corridor camera is, how thick the fog is, which
+station is lit. Nothing is React state, because all of it is read inside a
+render loop and state that re-renders a tree 60 times a second is not state, it
+is a stutter.
+
+The four acts tile that scalar end to end with no gaps between them. The
+project's own law says nothing should be legible during a camera move, and the
+first draft honored it by putting empty scroll between the acts. That was
+wrong, and the reason is worth keeping: an act boundary is not a pause, it is a
+handover. A gap between two acts is a stretch of scroll where no sequence owns
+the frame, which is a held picture with nothing driving it. The silence belongs
+in the copy windows, where the argument for silence actually applies, and those
+windows still have it.
+
+## Two sequences, one canvas, and a cut that had to be earned
+
+Act 1 is 133 pre-rendered plates, taken from a 160 frame descent. The 27 that
+were dropped are not damaged frames. They are the last of the pure straight
+down approach, engineered for a rooftop landing this film no longer performs.
+The pitch point was ruled at frame 132, at an altitude of 925 m, because the
+street grid is already readable from there. Pitching over any later would have
+spent the film's signature move on a dark rectangle.
+
+Act 2 is 41 new frames at 1440x1080, and they were rendered twice. The first
+pass solved the street channel out of the city massing so the camera would
+stand up along a real street rather than a chosen one. The second pass added
+the bank, on a ruled tilt curve, so the horizon rolls as the camera comes
+level instead of snapping flat.
+
+<img
+  src="/journal/road-film-nadir.jpg"
+  alt="Act 1 plate near the pitch point: a straight down view of a lit city grid against dark water, rendered in Blender"
+/>
+
+The join between the two sequences is a hard cut, and it is allowed to be a
+hard cut because it was measured rather than assumed. The last plate of act 1
+and the first plate of act 2 sit 1.72 of 255 apart in the mean, with 0.12% of
+the frame more than 12 of 255 apart. The ordinary steps on either side of that
+join are 11.12 and 22.07. The cut is a smaller change than a normal frame
+advance, so a cross fade would have been a dissolve added to hide nothing. Both
+sequences share one canvas and one scrub, which makes the swap a frame change
+and nothing else: no fade, no second layer, no compositing.
+
+## The jank was pacing, and only an instrument could tell
+
+The client's note after the first smoothness pass was that the transition into
+the horizontal shot felt like it was bottlenecking or just being weird. Three
+suspects were obvious. Two were innocent, and the measurement is what cleared
+them: the cut was innocent, as above, and decoding was innocent too.
+
+The guilty party was that the plates were being played at wildly uneven speed.
+Inside act 2 alone, peak to trough in how much the picture changed per unit of
+scroll ran 149 to 1. The reader was crossing some of the rotation in a blink
+and grinding through the rest.
+
+The fix was scroll rather than pixels, and it is the measurement inverted. The
+act's local progress is remapped by taking the measured flow profile, raising
+it to a power, and integrating it, which is the same partial arc length
+reparameterisation used to space points evenly along a curve. Two conditions
+were solved on it rather than tuned by feel. The join is rate continuous, so
+act 2's first step runs at act 1's exit rate exactly, which took a 17% surge
+down to 1.5%. And a floor under the profile stops the 25 near identical plates
+at the end of the act from claiming the entire scroll budget.
+
+The exponent was ruled, not picked. Scored across the whole act the number is
+meaningless, because act 2 eases to a standstill and a log slope goes to
+infinity there. Scored across the window the client actually named it falls
+from 148 to 62, and it is flat between exponents 0.4 and 0.7. That flatness is
+the useful finding: half measures do not move this. Either the profile is
+flattened properly or it is not worth touching at all.
+
+The curve is carried as nine velocities rather than nine positions, and that
+was also measured. Nine positions reproduce the same remap to within a quarter
+of a plate, but they put a 37% velocity step at each of eight interior knots,
+which is twice the size of the join step this entire exercise existed to
+remove. Nine velocities cost the same nine numbers, integrate in closed form to
+a piecewise quadratic, and cannot lurch by construction.
+
+<img
+  src="/journal/road-film-pitchover.jpg"
+  alt="The end of act 2: the pitch over complete, the street channel standing horizontal with the city massing beyond it"
+/>
+
+## The seam had to be photographed layer by layer
+
+Act 3 leaves the plates behind and runs live. The handoff is a fade across a
+window of scroll, under three rules the project already held: land on a low
+motion stretch, match the colour underneath by measurement, and drop the dead
+layer out of compositing entirely once it is invisible.
+
+The window was ending at the wrong place, and it was wrong twice. Finding both
+took photographing the seam in three layers at every step of the window: the
+shipped composite, the plate alone, and the live scene alone.
+
+The first fault was that the plate freezes before the window closes, so two
+fifths of the fade was a cross fade between two still pictures. A cross fade
+under motion is invisible. A cross fade between two stills is a visible
+dissolve, and the film's own seam law says so, and it was happening at the
+bottom of the very window that law governs.
+
+The second fault was arithmetic on the wrong denominator. The live scene runs
+its own dawn settle against the remainder of the film, not against act 3, so by
+the old end point the corridor was already a third of the way through that
+settle. The plate was being colour matched against a colour that had left.
+Ending the fade where the plates end puts the last frame of it at exactly zero
+on the corridor's clock, where the live scene is still sitting on the plate's
+measured exit value.
+
+What the window cannot do is make the two pictures match. The plate's last
+frames wash to a bright haze while the live corridor is a dark street with lit
+windows, and they are 47 of 255 apart. No timing fixes that. What good timing
+buys is spending half as much scroll on the disagreement and spending all of it
+under motion, which is the most a seam is allowed to do. The rest is a re
+render, and it is written down as such.
+
+## The parts that are allowed to be boring
+
+The corridor is billboarded cards staggered in depth, which means its length is
+free. When the total runway came down from 1200 viewport heights to 950, no act
+had to be re-timed and no frame had to be re-rendered, because the acts are
+fractions of the scalar and the corridor's filler absorbs the difference. That
+was the elasticity claim being spent rather than described.
+
+The runway came down because scrolling it was a chore, and the real cause was
+gain rather than length: at the old settings one mouse notch travelled 0.44% of
+the film, so crossing it took 227 of them. Mediating the scroll took one notch
+to 5.00%. The trim removed the slack that was left over.
+
+Three more things exist because a demo can fail in a room. There is a complete
+second version of the site with the film removed: same copy, one still picture,
+no canvas, no scroll scalar, no dynamic import, and it is identical with
+scripting turned off. The plate player degrades a missing sequence to the held
+last frame of act 1 rather than to a blank, because a held frame reads as a
+slow connection and a blank reads as a broken site, and a stale CDN or a
+partial upload puts a real reader on that path. And the email capture on every
+ending is visibly present and provably inert, which is the honest state of it
+until there is something to sign up for.
+
+The film's spine is deliberately a second spine rather than an extension of the
+homepage's. The homepage is the guaranteed fallback, and a route being
+assembled the afternoon before it is shown must not be able to break the thing
+it is the fallback for.
+
+## What it runs on
+
+Next.js 15.5 on the App Router, React 19.2, TypeScript 5.9, three.js 0.185
+through React Three Fiber, and no CSS framework at all: the design system is
+hand written custom properties. The frames come out of Blender scripts that
+live in the repo, and the frames themselves are build artefacts rather than
+source.
+
+Every line of copy is typed data in one directory, and no component holds any
+of it. That is not tidiness. It means a rewrite is a data change that a non
+developer can read in a diff, which is the difference between a client being
+shown their words and a client being able to check them.
+
+The engineering debt is written down in the same repo as a numbered register,
+currently 40 entries deep, including the ones found the day of the handover.
+One of those is a build that was run against a live server and served a site
+with dead JavaScript, caught by a QA pass before the demo rather than during
+it. The register exists so that the next person to touch this, including me in
+six months, inherits the list rather than rediscovering it.
+
+_This entry covers client work. The technique is the subject; the client's
+business is theirs._

@@ -4,6 +4,22 @@
 
 const posts = [
   {
+    slug: "the-road-film",
+    title: "The Road Film",
+    codename: "OPERATION: VANISHING POINT",
+    date: "2026-08-20",
+    dek: "A client site now opens as a four act film you scroll: 133 pre-rendered plates fall toward a city, 41 more stand the camera up out of the fall, and a live three.js corridor carries the last 55% of the page to a horizon. The hard cut between the two plate sequences is 1.72 of 255 wide, which is why it is allowed to be a cut.",
+    hero: "/journal/road-film-corridor.jpg",
+    tags: [
+      "three-js",
+      "react-three-fiber",
+      "scroll-choreography",
+      "blender",
+      "client-work",
+    ],
+    draft: false,
+  },
+  {
     slug: "the-crown",
     title: "The Crown",
     codename: "OPERATION: EIGHTFOLD",
