@@ -11,8 +11,8 @@ import BootSequence from './components/BootSequence';
 import InteractiveTerminal from './components/InteractiveTerminal';
 
 const stats = [
-  { label: 'REVENUE_INFLUENCED', numValue: 1.5, prefix: '$', suffix: 'M', unit: '/month', color: 'text-neon-green', decimals: 1 },
-  { label: 'DEVS_TRAINED', numValue: 350, prefix: '', suffix: '', unit: '+', color: 'text-neon-cyan', decimals: 0 },
+  { label: 'REVENUE_INFLUENCED', numValue: 1.5, prefix: '$', suffix: 'M', unit: '/month · 2022–23', color: 'text-neon-green', decimals: 1 },
+  { label: 'DEVS_TRAINED', numValue: 350, prefix: '', suffix: '', unit: '+ · 2019–21', color: 'text-neon-cyan', decimals: 0 },
   { label: 'ACTIVE_OPERATIONS', numValue: 3, prefix: '', suffix: '', unit: ' live', color: 'text-neon-magenta', decimals: 0 },
 ];
 

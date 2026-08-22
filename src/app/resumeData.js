@@ -81,7 +81,7 @@ const resumeData = {
       role: 'Front End Engineer',
       start_date: 'Apr 2022',
       end_date: 'Jul 2023',
-      brief: 'Four women\'s fashion eCommerce brands. One engineer. $1.5M/month in combined revenue flowing through interfaces I built and optimized.',
+      brief: 'Four women\'s fashion eCommerce brands. One engineer. $1.5M/month in combined revenue flowed through interfaces I built and optimized.',
       techStack: [
         { name: "Shopify", icon: "SiShopify" },
         { name: "React.js", icon: "SiReact" },
