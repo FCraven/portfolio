@@ -4,7 +4,7 @@ const resumeData = {
   email: 'craven.francis@gmail.com',
   github: 'https://www.github.com/FCraven',
   linkedin: 'https://www.linkedin.com/in/francis-craven-ab1029b3',
-  tagline: 'Front-end systems architect',
+  tagline: 'Founder & Lead Engineer, SeaRaven Studios',
   bio: 'I build commerce platforms that move real money, teach developers who ship real products, and obsess over the 200ms that separate a good interface from a great one.',
   status: 'Exploring front-end roles and consulting engagements where craft matters.',
   education: [
