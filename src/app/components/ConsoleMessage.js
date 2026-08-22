@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import resumeData from '../resumeData';
 
 export default function ConsoleMessage() {
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function ConsoleMessage() {
     console.log('%c> SYSTEM INITIALIZED', styles.banner);
     console.log('%c─────────────────────────────────────────', styles.muted);
     console.log('%c$ whoami', styles.green);
-    console.log('%c  Francis Craven — Front-End Systems Architect', styles.cyan);
+    console.log(`%c  ${resumeData.name} — ${resumeData.tagline}`, styles.cyan);
     console.log('%c$ cat /sys/stack', styles.green);
     console.log('%c  React · Next.js · Vue · TypeScript · Node · Medusa · Shopify', styles.cyan);
     console.log('%c$ echo $STATUS', styles.green);

@@ -18,7 +18,8 @@ export default function Navbar() {
 
   return (
     <nav className="fixed inset-x-0 top-0 z-30">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div aria-hidden="true" className="nav-scrim pointer-events-none absolute inset-x-0 top-0 h-28" />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="terminal-panel mt-4 flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link href="/" className="flex items-center gap-3 group">
             <span className="flex h-9 w-9 items-center justify-center rounded border border-neon-green/40 bg-neon-green/10 font-heading text-sm font-bold text-neon-green shadow-[0_0_15px_rgba(0,255,136,0.15)] transition-all group-hover:shadow-[0_0_25px_rgba(0,255,136,0.3)]">

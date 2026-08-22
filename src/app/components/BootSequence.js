@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import resumeData from '../resumeData';
 
 const bootLines = [
   { text: 'CRAVEN_OS v1.0', delay: 0, type: 'header' },
@@ -12,8 +13,8 @@ const bootLines = [
   { text: '[OK] Loading modules: React, Next.js, Tailwind', delay: 1200, type: 'ok' },
   { text: '[OK] Mounting /dev/portfolio', delay: 1500, type: 'ok' },
   { text: 'Loading operator profile...', delay: 1800, type: 'system' },
-  { text: '> Name: Francis P. Craven', delay: 2100, type: 'data' },
-  { text: '> Role: Front-end Systems Architect', delay: 2300, type: 'data' },
+  { text: `> Name: ${resumeData.name}`, delay: 2100, type: 'data' },
+  { text: `> Role: ${resumeData.tagline}`, delay: 2300, type: 'data' },
   { text: '> Status: ONLINE', delay: 2500, type: 'status' },
   { text: '', delay: 2700, type: 'blank' },
   { text: 'All systems operational. Launching interface...', delay: 2800, type: 'final' },

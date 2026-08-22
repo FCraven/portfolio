@@ -4,7 +4,7 @@ const resumeData = {
   email: 'craven.francis@gmail.com',
   github: 'https://www.github.com/FCraven',
   linkedin: 'https://www.linkedin.com/in/francis-craven-ab1029b3',
-  tagline: 'Front-end systems architect',
+  tagline: 'Founder & Lead Engineer, SeaRaven Studios',
   bio: 'I build commerce platforms that move real money, teach developers who ship real products, and obsess over the 200ms that separate a good interface from a great one.',
   status: 'Exploring front-end roles and consulting engagements where craft matters.',
   education: [
@@ -81,7 +81,7 @@ const resumeData = {
       role: 'Front End Engineer',
       start_date: 'Apr 2022',
       end_date: 'Jul 2023',
-      brief: 'Four women\'s fashion eCommerce brands. One engineer. $1.5M/month in combined revenue flowing through interfaces I built and optimized.',
+      brief: 'Four women\'s fashion eCommerce brands. One engineer. $1.5M/month in combined revenue flowed through interfaces I built and optimized.',
       techStack: [
         { name: "Shopify", icon: "SiShopify" },
         { name: "React.js", icon: "SiReact" },

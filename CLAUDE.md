@@ -42,8 +42,8 @@ Francis P. Craven's personal developer portfolio — redesigned as **CRAVEN_OS**
 --neon-magenta:  #FF00FF   /* tertiary accent */
 --surface:       #12121A   /* card backgrounds */
 --text-primary:  #E0E0E0
---text-muted:    #888888
---border:        #1E1E2E
+--text-muted:    #8484A4
+--border:        #2A2A3A
 ```
 
 **Fonts** (via `next/font/google`):

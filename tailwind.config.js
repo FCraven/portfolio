@@ -16,7 +16,7 @@ module.exports = {
         'neon-cyan': '#00D4FF',
         'neon-magenta': '#FF00FF',
         'text-primary': '#E0E0E0',
-        'text-muted': '#5A5A7A',
+        'text-muted': '#8484A4',
         border: '#2A2A3A',
       },
       fontFamily: {
