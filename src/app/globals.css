@@ -47,6 +47,18 @@
     @apply rounded-lg border border-[var(--border)] bg-[var(--surface)] shadow-[0_0_30px_rgba(0,255,136,0.03)];
   }
 
+  /* The nav panel floats with a 16px gutter above it and open margins beside it.
+     Without a scrim, scrolled content shows through those gaps and slices the
+     hero wordmark. Solid through the panel's full height, then a short fade. */
+  .nav-scrim {
+    background: linear-gradient(
+      to bottom,
+      var(--void) 0%,
+      var(--void) 75%,
+      rgba(10, 10, 15, 0) 100%
+    );
+  }
+
   .hud-panel {
     @apply relative rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden;
   }
