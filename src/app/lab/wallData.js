@@ -5,9 +5,9 @@
 export const wallMeta = {
   station: "SeaRaven Foundry",
   blurb:
-    "The workshop wall. Two programs are on the bench: Digital Montauk, a survey-accurate digital twin of the point built in public, and client work in survey-grade 3D and scroll-driven film. This wall shows what is on the bench right now.",
+    "The workshop wall. Three programs are on the bench: Digital Montauk, a survey-accurate digital twin of the point built in public; client work in survey-grade 3D and scroll-driven film; and a multi-brand commerce platform on Medusa 2.19.0. This wall shows what is on the bench right now.",
   datum: "Digital Montauk · 41.0709 N · 71.8572 W · NAVD88 ft",
-  updated: "2026-08-21",
+  updated: "2026-08-27",
   registrySubjects: 236,
 };
 
@@ -21,6 +21,11 @@ export const onTheBench = [
     secondImageAlt:
       "West elevation bench \u2014 render-calibrated daymark band on the fixed instrument",
     note: "The bar: a render a Montauk local cannot tell from a photograph, and nothing ships as product below it. The machinery: 102 numbered verdicts from a human eye, each cross-checked against the 1860s drawings before geometry moves; a 24-agent adversarial audit tracing every builder constant to its registry source; paint calibrated in a closed loop against reference photographs to 1.3%; a structural-similarity instrument that localizes every change. The claim is now under a sealed test rather than an opinion: a two-alternative forced-choice kit frozen on 2026-08-13, 4 scored pairs and 2 catch trials, answers never stored but re-derived from a seed at scoring time so that opening the kit is itself recorded. The drawings keep winning arguments; the walkway pattern the eye flagged turned out to be cast into the 1860 segment plan all along.",
+  },
+
+  {
+    tag: "BENCH-5 \u00b7 the commerce platform \u00b7 first order, end to end",
+    note: "The first end-to-end order through the admin flow returned a 400 no test had ever produced. Medusa 2.19.0 hydrates the order from a fixed field list that omits items.variant.metadata, and hands providers fulfillment_item rows \u2014 a model with no variant relation and no variant_id \u2014 so a provider mapping order lines onto vendor SKUs was wired, covered by green tests, and never once executable through the real caller. Fixtures had been constructing an input the real caller never produces. The provider now correlates items[].line_item_id against order.items[].id and resolves its own data out of its own arguments, which makes it independent of that field list permanently. The proof is a real sandbox order, its fulfillment created and then cancelled through the same admin route a human clicks. The trace went upstream as medusajs/medusa issue #16621 and PR #16622: 12 additions, 1 deletion, 3 files \u2014 one line on the query, one paragraph documenting what the items argument actually carries.",
   },
 
   {
