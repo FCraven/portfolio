@@ -4,6 +4,16 @@
 
 const posts = [
   {
+    slug: "wired-never-executed",
+    title: "Wired, Never Executed",
+    codename: "OPERATION: FIRST ORDER",
+    date: "2026-08-27",
+    dek: "The first real end-to-end order on a Medusa 2.19.0 commerce platform returned a 400 no test suite had ever produced: the admin fulfillment workflow hydrates orders from a fixed field list, and hands providers fulfillment_item rows that carry no variant relation at all — so a provider that maps order lines onto vendor SKUs had never once been executable through the real flow.",
+    hero: null,
+    tags: ["medusa", "commerce", "debugging", "open-source", "testing"],
+    draft: false,
+  },
+  {
     slug: "the-road-film",
     title: "The Road Film",
     codename: "OPERATION: VANISHING POINT",

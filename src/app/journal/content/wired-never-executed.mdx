@@ -1,0 +1,117 @@
+The first end-to-end order on a multi-brand commerce platform is meant to be a
+formality — a receipt that the wiring is real. Every unit test on the
+fulfillment provider was green. The provider had been written, reviewed, and
+registered for weeks. Then `POST /admin/orders/:id/fulfillments` came back 400,
+`Variant undefined is not mappable to a vendor SKU`, and the field that mattered
+was not the one the error named. `item.variant.metadata` was missing, which was
+survivable. `item.variant_id` was missing too, which was not.
+
+That second absence changes the diagnosis. A thinned-out variant is a hydration
+problem. A record with no `variant_id` at all is a record that was never going
+to have one.
+
+## Fixtures build inputs the real caller never produces
+
+The provider's tests passed because the provider's tests built their own inputs.
+A fixture that hand-writes `{ variant: { metadata: { vendor_sku: "..." } } }`
+proves the mapping arithmetic and nothing about the pipeline, and the mapping
+arithmetic was never in doubt. Every assertion in that suite was true. Not one
+of them was about Medusa.
+
+That is the defect class worth naming: **wired but never executed.** The code
+existed, the config registered it, the tests covered it, and the path from the
+real caller into that function had never once been walked. Green CI is the
+condition under which this ships, not the evidence against it.
+
+## The trace, in three findings
+
+**One — the workflow hydrates the order from a fixed field list.** Medusa
+2.19.0's `createOrderFulfillmentWorkflow` fetches the order through
+`useQueryGraphStep` with an explicit array of fields:
+
+```ts
+"items.variant.material",
+"items.variant_title",
+"items.variant.upc",
+"items.variant.sku",
+"items.variant.barcode",
+"items.variant.hs_code",
+```
+
+Twenty-odd variant fields are requested there. `metadata` is not one of them,
+and a query graph returns what it is asked for.
+
+**Two — `fulfillment_item` has nowhere to put a variant.** The `items` argument
+handed to the provider is a list of persisted rows, and that model is the whole
+of it:
+
+```ts
+export const FulfillmentItem = model.define("fulfillment_item", {
+  id: model.id({ prefix: "fulit" }).primaryKey(),
+  title: model.text(),
+  sku: model.text(),
+  barcode: model.text(),
+  quantity: model.bigNumber(),
+  line_item_id: model.text().nullable(),
+  inventory_item_id: model.text().nullable(),
+  fulfillment: model.belongsTo(() => Fulfillment, { mappedBy: "items" }),
+})
+```
+
+No `variant`, no `variant_id`. The absence is structural, so no amount of
+upstream hydration puts variant data on that argument.
+
+**Three — the provider cannot go and fetch it either.** A fulfillment
+provider's container is the fulfillment module's own, not the application's.
+Enumerated at runtime on 2.19.0 it holds the module's repositories and services
+plus `logger`, `manager`, `configModule`, `event_bus`, `caching` and
+`__pg_connection__` — no `query`, no `remoteQuery`, no `product`. There is no
+supported escape hatch from inside the provider.
+
+## The comment was a claim, and claims get verified
+
+The signature is `createFulfillment(data, items, order, fulfillment)`, and
+`AbstractFulfillmentProviderService` documents its second argument in six words:
+_@param items - The items in the fulfillment._
+
+True, useless, and it invites exactly the wrong reading — that `items` is the
+order's lines. It is a different model with a different shape, and neither the
+type nor the prose says so. Reading that comment as a specification is what
+produced a provider reaching for `item.variant`. Reading the source is what
+produced the fix.
+
+## The fix belongs on the provider
+
+Upstream can add a field. Upstream cannot promise to keep it. So the durable
+repair was to stop depending on how much the caller happened to hydrate: the
+`order` argument reaches the provider untouched, so the provider correlates
+`items[].line_item_id` against `order.items[].id` and reads the variant from the
+order it was already given. The provider now resolves its own data out of its
+own arguments, which makes it independent of that field list permanently —
+including on the versions where the one-line patch below does not exist.
+
+## The proof was an order, not a test
+
+A green suite had already been wrong once, so the standard for "fixed" moved.
+The evidence is a real order in a sandbox, its fulfillment created and then
+cancelled through the same admin route a human clicks, against the real
+workflow, the real module service, and the real provider. No fixtures were
+involved in the proof of anything.
+
+## Upstream
+
+The trace was worth more to Medusa than to one platform, so it went back:
+[issue #16621](https://github.com/medusajs/medusa/issues/16621) documents the
+three findings against 2.19.0, and
+[PR #16622](https://github.com/medusajs/medusa/pull/16622) is 12 additions and 1
+deletion across 3 files — one line adding `items.variant.metadata` to the
+create-fulfillment field list, and a paragraph in the provider docs stating what
+the `items` argument actually carries and how to correlate it back to the order.
+
+The one-liner does not make `fulfillment_item` carry a variant; nothing short of
+a schema change would. It makes the data reachable on `order`, and the docs
+paragraph makes the correlation discoverable by someone reading the guide
+instead of the source. That is the honest size of the fix.
+
+_The platform is mine; the bug is Medusa's and now public. Order identifiers are
+withheld here for the same reason the upstream issue withholds them._
