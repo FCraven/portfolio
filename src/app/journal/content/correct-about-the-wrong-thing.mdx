@@ -1,0 +1,235 @@
+A print-mastering chain that takes a 1024×1280 original to 4800×6000 — exactly
+300 DPI at 16×20 — is mostly a stack of measurements standing on each other. On
+2026-09-24 five of those measurements were caught giving wrong answers, and the
+chain shipped nothing.
+
+Not one of the five had a bug. Each computed its own quantity correctly and
+reported it honestly. **The failure mode worth naming is that an instrument
+rarely fails by computing wrong — it fails by computing correctly about the
+wrong thing.** A proxy for a harm is not the harm, and from inside the number
+the difference does not show.
+
+Then a human eye at 1:1 rejected a file that had passed all five corrected
+gates, which is the part of the day that earned the other five.
+
+## A small RSS is the thrash
+
+The chain hung, and nothing on a 38 GB machine looked guilty. The largest
+process held 0.6 GB and the kernel called 58% of memory free.
+
+The guilty process was the one reading 0.61 GB. A ComfyUI session accumulates
+allocations across sequential prompt submissions, and this one was holding
+roughly 10 GB of them — swapped out, not resident. RSS measures residency, so a
+session reading itself back from swap on every inference reports as a small,
+innocent process, and hunting the memory hog by RSS sends you looking at
+unrelated apps.
+
+**The reading inverts, which is why the instinct fails.** Measured across the
+same lane's failed and fixed runs, ComfyUI's RSS was 0.61 GB while thrashing
+and 3.98 GB while healthy — swap at 22994 MB against 15903 MB, per-tile time 50
+seconds and climbing against 44 seconds and steady. **A large RSS is the
+healthy state**, because it means the model is resident. The ordinary instinct
+to suspect whichever process holds the most memory points at the bench that is
+working and away from the one that is dying.
+
+One HTTP call to ComfyUI's `/free` released 9.5 GB of swap. Diagnosis and cure
+are the same call, which is the useful property: if swap drops sharply
+afterwards, the session was the cause.
+
+## Three proxies, one harm
+
+Three guards for memory pressure were convicted on this bench inside one
+campaign, each failing in a different direction.
+
+**Pageouts per second slept through a real thrash.** The stop-line was ruled at
+sustained pageouts above 100/s. It read 0/s while frame 1 took 431 seconds
+against a 224-second baseline and frame 2 never landed at all, with swap
+sitting at 18.9 of 19.4 GB.
+
+**Swap occupancy would have aborted a healthy bench.** macOS grows its
+encrypted swap file on demand and then keeps it near-full by design, so
+occupancy read 94% — 16348 of 17408 MB — on a bench with 0 swapouts/s, 0
+pageouts/s, 67% of memory free by the kernel's own count, and three consecutive
+tiles landing at 44, 44 and 44 seconds. A bench turning out three identical
+tiles is not thrashing, and occupancy near 100% is the steady state of a grown
+swap file rather than evidence of pressure.
+
+**Swapouts per second fired on a run that was fine.** Set at 200/s, it tripped
+on tile 4 of a healthy run at 278/s while every tile was landing on time.
+
+The third is the instructive one, because it was written into the same class
+whose docstring already said swapouts are reported and never ruled on alone. A
+threshold picked without measuring what normal looks like is the exact error
+that class exists to correct, committed one screen below the paragraph
+correcting it.
+
+**The ruling: guard on the harm itself.** The damage a stop-line exists to
+prevent is a job that stops making progress, and that is directly observable as
+a tile whose wall-clock blows past the run's own warm median. The abort sits at
+2.5× that median and never rules on fewer than 3 warm samples, with swapouts and
+occupancy printed beside it and deciding nothing. A run's own warm median is a
+ruler the run calibrates for itself, which is why it survives a change of
+canvas, of machine and of subject.
+
+That replacement was then ratified while still blind to the case it had been
+built citing, because it evaluated after a tile completed and a tile that never
+completes never reaches the check. It now bounds the wait rather than only
+inspecting the result: a tile that has not returned within 6× the warm median,
+floored at 300 seconds, is interrupted and aborted, so a hang costs about five
+minutes instead of an unbounded stretch of night. Two owners there, and both are
+worth naming — the guard was built without asking when it ran, and it was
+ratified without that question being asked either. **When a check runs is part of
+what the check is**, and a guard specified only by its threshold is
+half-specified.
+
+## A watch armed on events cannot see their absence
+
+The monitoring around the run was entirely event-driven — a log tail, and waits
+armed on strings like `done in`. A hang produces no line to match, so the tail
+stayed quiet, the waits stayed armed, and the quiet was indistinguishable from
+a bench that simply had not printed yet. 106 minutes passed between checks on
+the belief that no news was good news.
+
+The replacement watches mtime instead of content. A working run advances its
+log on a cadence the work does not control and a hung one does not, so
+staleness is a positive, checkable fact rather than an inference from silence,
+and it costs one `stat()` to read.
+
+**It nearly shipped unable to fail.** The first attempt to prove it could
+detect a stall used the killed pilot's own log, and the watchdog reported the
+file alive — killing the run had touched the file's mtime. A watchdog validated
+against a file that was not stale would have passed its own test and then
+watched all night without the ability to fire. It was re-proved against a
+synthetic 98-minute-stale file before it was trusted.
+
+## A ratio is not a threshold
+
+The fourth instrument was an invention ratio: leaked high-frequency energy over
+the high-frequency headroom available in the original, with a 5% gate on it.
+Stage 1 of the pilot tripped that gate at 10.2% and the run halted.
+
+The gate was wrong, and the proof was already in the house's own records. Run
+at the ratified mask floor against a master this house had accepted and
+shipped, the same measure reads **5.2%** — the gate sat a hair below the work it
+was meant to protect, and nothing had noticed because it had only ever been
+read on two pieces sitting close together on one curve.
+
+The structural reason is that a ratio's denominator moves with the subject and
+with position on the ladder. On the pilot, stage 0 read 1.8% at an absolute
+ground delta of 0.455 LSB while stage 1 read 10.2% at 0.366 LSB. **The ratio
+rose 5.7× while the actual difference fell.** A metric whose measuring point
+moves with its subject is not a measurement.
+
+So the ratio was demoted to a permanent tripwire, which is work it does well —
+it forced a stop-and-look that afternoon and the stop was correct even though
+the number was not. Shippability moved to the absolute ground delta against a
+frozen 0.79 LSB visibility threshold, and a frame that needs a new threshold in
+order to pass fails instead.
+
+## The frame passed every gate and failed the eye
+
+The master then built clean. 4800×6000 exactly, per-rung ground deltas of
+0.455, 0.366 and 0.349 LSB all inside the frozen threshold, seam audit passing,
+ground pristine, and every tile landing on cadence including the one where the
+previous run had hung.
+
+At 1:1 the charcoal read as pale-outlined cellular clumping with an olive-blue
+cast — a diffusion model's idea of granularity rather than charcoal sitting in
+paper tooth. Chroma in the darks ran 4.12 → 7.45 → 10.09 → 12.09, injected
+monotonically at every rung.
+
+**The mask did its job, and the damage was where it opened — the one place
+nothing was measuring.** Every invention check this lane had built watched the
+ground, and the ground was the part that was fine.
+
+The mechanism is that the mask has a floor and no ceiling. The floor says
+_below this, variation is the ground's own facture, so leave it._ Nothing said
+_above this, variation is the stroke's own facture, so leave that too._ And a
+local-contrast mask opens widest exactly where a mark is densest: this piece's
+stroke body sits at local contrast p50 18.5 against a ratified `abs_hi` of
+18.49, so the mask is saturated fully open across 86% of the stroke body. That
+one fact predicts every observation — pristine ground, overwritten stroke
+interior, damage scaling with total refine.
+
+The precedent could not have caught it. The chain was validated on a
+continuous-tone piece, which has no stroke interior to damage and where chroma
+in the darks is expected, and it met a mark-making register for the first time
+here. That is the same shape as the ratio: a constant derived from two subjects
+sitting close together on a curve, broken by a third.
+
+## The obvious fix, measured dead in five minutes
+
+A ceiling on the mask is the obvious repair, and it does not work. Establishing
+that cost five minutes of CPU and no GPU at all, because the ceiling is a
+composite-time parameter and the refined tiles were already on disk.
+
+Recomposed on the same refined tiles, the trade-off runs one way the whole
+distance. With no ceiling the master keeps 83.1% of the restoration at a
+roughness of 13.00 against the un-refined control's 12.12; at a ceiling of 20 it
+keeps 51.3% at 12.58; at a ceiling of 13 the roughness finally matches the
+control exactly at 12.12 and the restoration kept has collapsed to 7.9%.
+**Register reaches the un-refined control only at the setting where the refine
+has stopped working, so register and restoration trade about 1:1.**
+
+The reason outlives the parameter. **Local contrast cannot distinguish a
+stroke's own facture from the edge detail worth restoring, because they are the
+same measurement.** The floor works because smooth ground genuinely is
+separable on that axis. The top end is not, so no one-dimensional gate there
+can do better than swap one for the other at par.
+
+The parameter shipped anyway — validated byte-identical when disabled, with the
+earlier accepted master still reproducing through it — so the next lane to
+reach for the obvious idea finds the measurement that rules it out instead of
+spending a day rediscovering it. A negative result is cheaper to ship than to
+repeat.
+
+## The instrument that caught it could not fail at first either
+
+None of these replacements were trusted on the strength of passing, because a
+check that cannot fail is not a check — and the instrument that finally measured
+this defect needed two corrections before it could fail at all. Its first version
+counted single-pixel luminance
+maxima and read zero on both the failing master and its control, because at 4800
+px wide the cells are 10 to 20 px across and a pixel-level peak test cannot see
+them. Its second fault was the control: compared against its own rung's control,
+which already carries every earlier rung's refinement, the failing master reads
+1.06× on roughness and looks fine, while against the pure-lanczos ladder it
+reads 1.27× — the real, cumulative damage. **The first reading would have cleared
+a picture the eye had already rejected.**
+
+## What the file is actually for
+
+The question that reframed the standard came from outside the instruments
+entirely. Do we want to be inventing textures when the textures will be printed
+on?
+
+No. The physical stock has its own surface at its own scale and the print gets
+it for free, so a depicted interior texture is unwanted twice over: it is
+invented, and it competes with the paper's own tooth at a different scale,
+leaving two granularities in the picture and neither of them the paper's. **The
+file's job is the drawing; the paper's job is the paper.**
+
+That settles what a 1:1 crop cannot: between a softer interior and a crisper
+invented one the softer wins, because the paper finishes it. And a physical proof
+on the actual stock now enters the acceptance path before any master is approved,
+because nothing on this bench can see what paper does.
+
+## The anchor is why the eye could rule
+
+Five corrected instruments are why the eye got a clean question to answer. The
+rejected master stayed on disk as an anchor, the lanczos-only control sat beside
+it, and the second variant was built without discarding the first — so the
+judgment was this against that, at 1:1, in the same window of the same picture.
+
+**An eye with nothing to compare against negotiates.** Shown one picture it
+asks whether the picture is good enough, which is a question about patience.
+Shown two it asks which one is better, which is a question about the pictures.
+
+A pre-authorised overnight run of eight frames was refused that night because
+nothing had yet passed an eye. Every one of the five corrections narrowed what
+the numbers could hide, and the defect that stopped the work was still found by
+looking.
+
+_The pipeline and its instruments are mine to write about. The artwork, the
+register it belongs to, and everything downstream of a finished master are
+deliberately absent here — this entry is about the measurements._

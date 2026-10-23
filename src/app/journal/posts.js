@@ -4,6 +4,16 @@
 
 const posts = [
   {
+    slug: "correct-about-the-wrong-thing",
+    title: "Correct, About the Wrong Thing",
+    codename: "OPERATION: MEASURE THE HARM",
+    date: "2026-09-24",
+    dek: "Five measurement instruments in a fine-art print-mastering pipeline were caught giving wrong answers in one day: a memory-pressure proxy that read 0 pages per second through a real thrash, an occupancy gauge that read 94% on a healthy bench, a swapouts trigger that fired at 278/s while every tile landed on time, an invention ratio whose own accepted master reads 5.2% against a 5% gate, and an event-driven watch for which a 98-minute hang emitted nothing to match. Each was replaced by a direct measurement of the harm — and then a human eye rejected a frame that had passed all five.",
+    hero: null,
+    tags: ["measurement", "comfyui", "print", "instruments", "debugging"],
+    draft: false,
+  },
+  {
     slug: "the-road-film",
     title: "The Road Film",
     codename: "OPERATION: VANISHING POINT",
