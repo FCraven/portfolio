@@ -42,25 +42,27 @@ export default function LabPage() {
             key={item.tag}
             className="terminal-panel rounded-lg border border-border p-5 sm:p-6 flex flex-col sm:flex-row gap-5"
           >
-            <div className="sm:w-[340px] shrink-0 space-y-3">
-              <Image
-                src={item.image}
-                alt={item.imageAlt}
-                width={680}
-                height={680}
-                className="rounded border border-border w-full h-auto"
-              />
-              {item.secondImage && (
+            {item.image && (
+              <div className="sm:w-[340px] shrink-0 space-y-3">
                 <Image
-                  src={item.secondImage}
-                  alt={item.secondImageAlt}
+                  src={item.image}
+                  alt={item.imageAlt}
                   width={680}
                   height={680}
                   className="rounded border border-border w-full h-auto"
                 />
-              )}
-            </div>
-            <div className="space-y-2">
+                {item.secondImage && (
+                  <Image
+                    src={item.secondImage}
+                    alt={item.secondImageAlt}
+                    width={680}
+                    height={680}
+                    className="rounded border border-border w-full h-auto"
+                  />
+                )}
+              </div>
+            )}
+            <div className={`space-y-2 ${item.image ? "" : "max-w-3xl"}`}>
               <p className="text-yellow-400 text-xs font-mono tracking-widest uppercase">
                 {item.tag}
               </p>

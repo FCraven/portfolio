@@ -32,15 +32,17 @@ export default function JournalPage() {
             href={`/journal/${post.slug}`}
             className="terminal-panel block group overflow-hidden rounded-lg border border-border hover:border-neon-green/50 transition-colors"
           >
-            <div className="relative aspect-[2/1] w-full overflow-hidden">
-              <Image
-                src={post.hero}
-                alt={post.title}
-                fill
-                sizes="(max-width: 896px) 100vw, 896px"
-                className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-              />
-            </div>
+            {post.hero && (
+              <div className="relative aspect-[2/1] w-full overflow-hidden">
+                <Image
+                  src={post.hero}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 896px) 100vw, 896px"
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                />
+              </div>
+            )}
             <div className="p-6 space-y-2">
               <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
                 <span className="text-neon-cyan tracking-widest">

@@ -5,6 +5,7 @@ import { allPosts, getPost } from "../posts";
 // Explicit content map — registry law: posts.js is the source of truth,
 // this maps slugs to their MDX modules.
 const content = {
+  "wired-never-executed": () => import("../content/wired-never-executed.mdx"),
   "the-road-film": () => import("../content/the-road-film.mdx"),
   "the-crown": () => import("../content/the-crown.mdx"),
   "the-keepers-hand": () => import("../content/the-keepers-hand.mdx"),
@@ -35,7 +36,8 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: post.title,
       description: post.dek,
-      images: [post.hero],
+      // hero is optional: a text-only entry must not emit an undefined image.
+      ...(post.hero ? { images: [post.hero] } : {}),
       type: "article",
       publishedTime: post.date,
     },
